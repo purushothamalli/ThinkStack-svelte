@@ -12,6 +12,7 @@ export const users = pgTable('users', {
 });
 
 export type newUser = typeof users.$inferInsert;
+export type user = typeof users.$inferSelect;
 
 export const userRelations = relations(users, ({ many }) => ({
 	sessions: many(sessions)
@@ -29,6 +30,7 @@ export const sessions = pgTable('sessions', {
 });
 
 export type newSession = typeof sessions.$inferInsert;
+export type Session = typeof sessions.$inferSelect;
 
 export const sessionRelations = relations(sessions, ({ one }) => ({
 	user: one(users, {

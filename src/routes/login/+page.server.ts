@@ -1,6 +1,6 @@
 import { authService } from '$lib/server/services/auth.service';
 import { setCookies } from '$lib/server/utils/cookies';
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions, type Cookies } from '@sveltejs/kit';
 import z from 'zod';
 
 const loginSchema = z.object({
@@ -9,7 +9,7 @@ const loginSchema = z.object({
 });
 
 export const actions: Actions = {
-	login: async ({ cookies, request }) => {
+	login: async ({ cookies, request }: { cookies: Cookies; request: Request }) => {
 		let success = false;
 		try {
 			const data = await request.formData();

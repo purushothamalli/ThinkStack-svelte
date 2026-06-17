@@ -1,5 +1,5 @@
 import { type Cookies } from '@sveltejs/kit';
-export const setCookies = (cookies: Cookies, accessToken: string, refreshToken: string) => {
+export const setCookies = (cookies: Cookies, accessToken: string, refreshToken: string): void => {
 	cookies.set('accessToken', accessToken, {
 		path: '/',
 		httpOnly: true,
@@ -13,7 +13,7 @@ export const setCookies = (cookies: Cookies, accessToken: string, refreshToken: 
 		maxAge: 60 * 60 * 24 * 7
 	});
 };
-export const deleteCookies = (cookies: Cookies) => {
+export const deleteCookies = (cookies: Cookies): void => {
 	cookies.delete('accessToken', { path: '/' });
 	cookies.delete('refreshToken', { path: '/' });
 };

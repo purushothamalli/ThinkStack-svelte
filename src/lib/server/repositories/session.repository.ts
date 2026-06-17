@@ -1,9 +1,30 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import { sessions, type newSession } from '../db/schema';
+import { sessions, type newSession, type Session } from '../db/schema';
 
 export const sessionRepository = {
-	findWithUser: async (sessionId: string) => {
+	findWithUser: async (
+		sessionId: string
+	): Promise<
+		| {
+				id: string;
+				createdAt: Date | null;
+				userId: string;
+				refreshTokenHash: string;
+				expiresAt: Date;
+				userAgent: string | null;
+				user: {
+					id: string;
+					firstName: string;
+					lastName: string;
+					email: string;
+					passwordHash: string;
+					profilePic: string | null;
+					createdAt: Date;
+				};
+		  }
+		| undefined
+	> => {
 		return await db.query.sessions.findFirst({
 			where: (sessions, { eq }) => eq(sessions.id, sessionId),
 			with: {
@@ -11,10 +32,14 @@ export const sessionRepository = {
 			}
 		});
 	},
-	createSession: async (data: newSession) => {
+	createSession: async (data: newSession): Promise<newSession> => {
 		return (await db.insert(sessions).values(data).returning())[0];
 	},
-	updateRefreshToken: async (sessionId: string, newToken: string, newExpiresAt: Date) => {
+	updateRefreshToken: async (
+		sessionId: string,
+		newToken: string,
+		newExpiresAt: Date
+	): Promise<Session> => {
 		return (
 			await db
 				.update(sessions)
@@ -23,10 +48,10 @@ export const sessionRepository = {
 				.returning()
 		)[0];
 	},
-	deleteSession: async (sessionId: string) => {
+	deleteSession: async (sessionId: string): Promise<Session> => {
 		return (await db.delete(sessions).where(eq(sessions.id, sessionId)).returning())[0];
 	},
-	deleteAllUserSessions: async (userId: string) => {
-		return await db.delete(sessions).where(eq(sessions.userId, userId));
+	deleteAllUserSessions: async (userId: string): Promise<Session[]> => {
+		return await db.delete(sessions).where(eq(sessions.userId, userId)).returning();
 	}
 };
