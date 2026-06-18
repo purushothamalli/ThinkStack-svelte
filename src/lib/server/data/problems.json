@@ -1,0 +1,902 @@
+[
+	{
+		"_id": "6a003024a92f2660baba2e74",
+		"title": "The South Pointing Bear Color Logic",
+		"description": "A hunter walks 1 mile south, 1 mile east, and 1 mile north, arriving back exactly where he started. He sees a bear. What color is the bear?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "White. The only place on Earth where you can walk 1 mile South, 1 mile East, and 1 mile North to arrive at the same starting point is the North Pole. Therefore, it must be a polar bear.",
+		"hints": [
+			"This puzzle is not about biology; it is about geometry and the shape of the Earth.",
+			"Walking 'East' means you are walking along a line of latitude. Walking 'South' and 'North' means you are walking along lines of longitude.",
+			"Where is the only place on a globe where all lines of longitude intersect at a single point?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8c",
+		"title": "The Blindfolded Card Sorting by Parity",
+		"description": "You have a deck of 52 cards. Exactly 10 cards are face up, the rest are face down. You are blindfolded and wearing gloves, so you cannot see or feel which cards are face up. How do you divide the deck into two piles so that both piles have the exact same number of face-up cards?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Take exactly 10 cards off the top of the deck to form a second pile. Then, flip every single card in this new pile of 10 over. Both piles will now have the exact same number of face-up cards. (If there were 'x' face-up cards in the 10 you took, there are 10-x face-up cards in the original pile. By flipping the 10 cards, the 'x' face-up become face-down, and the 10-x face-down become face-up, matching the original pile).",
+		"hints": [
+			"Hint 1 (Understanding): You cannot feel or see the cards, so you must use a mathematical operation that universally affects whatever random subset you pull out.",
+			"Hint 2 (Approach): What happens if you take exactly 10 cards off the top to form a new pile? If that new pile happens to have 'X' face-up cards, how many face-up cards are in the remaining deck?",
+			"Hint 3 (Partial Logic): The main deck has '10 minus X' face-up cards. If you flip over every single card in your new, smaller pile of 10, how many face-up cards will it have?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e77",
+		"title": "The River Crossing of the Fox, Goose, and Grain",
+		"description": "A farmer needs to cross a river with a fox, a goose, and a bag of grain. The boat holds only the farmer and one item. If left alone, the fox will eat the goose, and the goose will eat the grain. How do they all cross safely?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "1. Take Goose across. 2. Return empty. 3. Take Fox across. 4. Bring Goose back. 5. Take Grain across. 6. Return empty. 7. Take Goose across.",
+		"hints": [
+			"Identify the troublemaker. Who is the only item that causes problems with both of the other items?",
+			"You must take the Goose across first. When you go back and bring the Fox across, you can't leave them together on the far side.",
+			"It is completely legal to take an item BACK to the starting side with you."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6c",
+		"title": "The Mislabeled Crates of Apples and Oranges",
+		"description": "There are 3 crates: one with Apples, one with Oranges, and one with Both. All three crates are mislabeled. You can pick one fruit from one crate. How do you correctly label all of them?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Pick a fruit from the crate labeled 'Both'. Since it's mislabeled, it must contain only Apples or only Oranges. If you pull out an Apple, you know that crate is Apples. The crate labeled 'Oranges' must be the 'Both' crate, and the crate labeled 'Apples' must be the 'Oranges' crate.",
+		"hints": [
+			"The crucial clue is that *every single crate* is mislabeled. None of them contain what their label says.",
+			"If you pick from the crate labeled 'Apples' and get an apple, it could still be the 'Both' crate. Is there a better crate to test first?",
+			"Start with the crate labeled 'Both'. Since it is mislabeled, what are the only two things that can actually be inside it?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e72",
+		"title": "The Handshake Protocol at the Diplomatic Summit",
+		"description": "10 diplomats attend a meeting. If each diplomat shakes hands exactly once with every other diplomat, what is the total number of handshakes?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "45 handshakes. The formula is n(n-1)/2. For 10 people: (10 * 9) / 2 = 45.",
+		"hints": [
+			"The first diplomat shakes hands with 9 other people.",
+			"When calculating the second diplomat's handshakes, remember you already counted their handshake with the first diplomat.",
+			"Try adding the sequence: 9 + 8 + 7... alternatively, think of the combination formula for choosing 2 people from a group of 10."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e73",
+		"title": "The Torn Book Page Number Deduction",
+		"description": "A book has one sheet torn out. The sum of the remaining page numbers is 15,000. Which pages were torn out? (Assume pages are consecutively numbered 1, 2, 3...)",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Pages 25 and 26. The sum of n pages is n(n+1)/2. If the book had 173 pages, the total sum is 15051. 15051 - 15000 = 51. The torn sheet contains two consecutive pages that sum to 51, which are 25 and 26.",
+		"hints": [
+			"The formula for the sum of all pages in a book from 1 to N is N(N+1)/2.",
+			"You need to find a total book page count (N) where the mathematical sum is just slightly larger than 15,000.",
+			"If a single sheet of paper is torn out of a book, it will always contain two consecutive numbers, one odd and one even."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e76",
+		"title": "The Five Books Overlapping Shelf Constraints",
+		"description": "Five books (Math, Science, History, Art, English) are on a shelf. History is in the exact middle. Science is to the immediate right of History. English is at an extreme end. Math is not next to Art. What is the order from left to right?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "English, Art, History, Science, Math. (History is 3rd. Science is 4th. English is 1st or 5th. Math and Art must be separated. If English is 1st, Art is 2nd, and Math is 5th).",
+		"hints": [
+			"Start with the absolutes. There are 5 spots. Place History in spot #3.",
+			"If History is in spot #3, where exactly does Science go? Place it now.",
+			"English must be at an extreme end (spot #1 or #5). Test both scenarios. In which scenario can you successfully separate Math and Art?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7c",
+		"title": "The Seven-Minute and Eleven-Minute Hourglass Timing",
+		"description": "You have a 7-minute hourglass and an 11-minute hourglass. How can you accurately measure exactly 15 minutes?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Start both hourglasses. When the 7-minute one runs out, start timing (0 minutes). The 11-minute hourglass has 4 minutes left. When the 11-minute one runs out (4 minutes), flip it. When it runs out again (11 minutes), exactly 15 minutes have passed (4 + 11 = 15).",
+		"hints": [
+			"You don't necessarily have to start measuring your 15 minutes from the exact moment you first flip the hourglasses.",
+			"If you start both hourglasses simultaneously, what happens the exact moment the 7-minute hourglass runs out?",
+			"At the 7-minute mark, the 11-minute hourglass still has some sand left. How much sand is left, and how can you use that as your starting point?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e89",
+		"title": "The Monty Hall Variable Door Probability",
+		"description": "You are on a game show. There are 3 doors. Behind one is a car; behind the others, goats. You pick Door 1. The host, who knows what's behind the doors, opens Door 3, which has a goat. He then asks: 'Do you want to switch your choice to Door 2?' Mathematically, is it to your advantage to switch?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Yes, you should always switch. When you first pick, you have a 1/3 chance of being right and a 2/3 chance of being wrong. When the host opens an empty door, the 2/3 probability collapses entirely onto the remaining unopened door. Switching gives you a 66.6% chance of winning, while staying keeps you at 33.3%.",
+		"hints": [
+			"Hint 1 (Understanding): Your initial choice has a 1/3 chance of being correct. That means there is a 2/3 chance the car is behind one of the OTHER two doors.",
+			"Hint 2 (Approach): When the host opens an empty door, does that 2/3 probability of the 'other' doors simply disappear, or does it shift?",
+			"Hint 3 (Partial Logic): The host is forced to reveal a goat. Because he intentionally filters out a losing door, the remaining unopened door inherits that full 2/3 probability."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9f",
+		"title": "The Multi-State Lightbulb Array Toggle Algorithm",
+		"description": "You have a 5x5 grid of lightbulbs. Pressing a bulb toggles its state and the state of all horizontally and vertically adjacent bulbs. Starting with all bulbs off, you want to turn a specific pattern of bulbs on. Is it always possible?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Not all patterns are possible. The game can be modeled as a system of linear equations over GF(2) (modulo-2 arithmetic). The 5x5 matrix has a null space of dimension 2. This means that out of the 2^25 possible configurations, only 2^23 are reachable. A pattern is solvable if and only if it is orthogonal to the vectors in the left null space of the adjacency matrix.",
+		"hints": [
+			"Hint 1 (Understanding): This is the classic game 'Lights Out'. The order in which you press the bulbs does not matter. Also, pressing a bulb twice is the same as pressing it zero times.",
+			"Hint 2 (Approach): Because pressing twice cancels out, this is a system of linear equations in modulo-2 arithmetic (where 1+1=0). There are 25 variables (the bulbs to press) and 25 equations (the final state of each bulb).",
+			"Hint 3 (Partial Logic): Not all systems of linear equations have a solution. The 25x25 matrix representing the grid is not 'full rank'. Therefore, out of the 2^25 possible patterns, a small fraction are mathematically impossible to reach."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2ea1",
+		"title": "The Hydra Decapitation Minimal Step Optimization",
+		"description": "Hercules fights a Hydra. The Hydra is a tree graph. Hercules chops off a leaf node. The Hydra instantly regenerates by copying the entire subtree that was rooted at the chopped node's parent, multiplying it by the current turn number. Despite the Hydra growing exponentially massive, does Hercules always eventually kill it?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Yes. This is Kirby and Paris's Hydra Game. Even though the Hydra grows terrifyingly large, it will always eventually die in a finite number of steps, no matter what strategy Hercules uses. The proof relies on assigning ordinal numbers to the branches. With each chop, the overall ordinal value strictly decreases, and since ordinals are well-ordered, it must eventually hit 0.",
+		"hints": [
+			"Hint 1 (Understanding): Visually, the Hydra grows astronomically larger with every chop. However, Hercules is always chopping off the 'leaf' nodes—the very tips of the branches.",
+			"Hint 2 (Approach): To prove it dies, mathematicians assign a value to the tree using transfinite ordinal numbers (numbers that go beyond infinity, like Omega).",
+			"Hint 3 (Partial Logic): Every time Hercules chops a head, the Hydra multiplies, but the overall mathematical 'ordinal' value of the tree strictly decreases. Because ordinals are well-ordered, you cannot decrease them infinitely. It must eventually hit zero."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e69",
+		"title": "The Single Fake Coin in a Batch of Nine",
+		"description": "You have 9 identical-looking coins. 8 are real and weigh the same, but 1 is fake and is slightly lighter. You have a balance scale. What is the minimum number of weighings required to guarantee you find the fake coin?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "2 weighings. Divide the coins into 3 groups of 3 (A, B, C). Weigh group A against group B. If they balance, the fake is in group C. If they don't, the fake is in the lighter group. Take the 3 coins from the lighter group, pick 2, and weigh them. If they balance, the fake is the 3rd coin. If they don't, the fake is the lighter coin.",
+		"hints": [
+			"Can you weigh more than one coin on each side of the scale at a time?",
+			"Instead of dividing the coins into 2 groups, what happens if you divide them into 3 equal groups?",
+			"If you weigh two groups of 3 against each other and the scale balances perfectly, what does that tell you about the remaining unweighed group?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e96",
+		"title": "The Chameleons' Island Color Conversion Synchronization",
+		"description": "On an island, there are 13 red, 15 green, and 17 blue chameleons. Whenever two chameleons of different colors meet, they both change into the third color. Is it possible for all chameleons to eventually become the same color?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "No, it is mathematically impossible. Look at the differences between the populations modulo 3. (13, 15, 17) -> differences are 2, 2, and 4. When a red and green meet, they become blue (-1 red, -1 green, +2 blue). The difference between any two colors modulo 3 never changes (it is an invariant). Since the differences start at 2 (not 0), you can never reach a state where two populations are exactly 0 (which would have a difference of 0).",
+		"hints": [
+			"Hint 1 (Understanding): Don't try to simulate individual meetings. Look for a mathematical property of the populations that stays the same (an invariant) no matter who meets who.",
+			"Hint 2 (Approach): When a Red and Green meet, they become Blue. This means Red decreases by 1, Green decreases by 1, and Blue increases by 2. Look at the differences between the population numbers.",
+			"Hint 3 (Partial Logic): Look at the populations modulo 3 (the remainder when divided by 3). The differences between the remainders never change. For all chameleons to be the same color, two populations must reach exactly zero."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e93",
+		"title": "Cheryl's Birthday Sequential Information Deduction",
+		"description": "Cheryl gives Albert and Bernard 10 possible dates for her birthday: May 15, May 16, May 19, June 17, June 18, July 14, July 16, August 14, August 15, August 17. Cheryl tells Albert only the month, and Bernard only the day. \nAlbert: 'I don't know the date, but I know Bernard doesn't know.' \nBernard: 'At first I didn't know, but now I do.' \nAlbert: 'Then I also know.' \nWhen is her birthday?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "July 16. If Bernard knew immediately, he'd have a unique day (18 or 19). Albert knows Bernard doesn't know, so Albert's month cannot be May or June (which contain 18 and 19). The month must be July or August. Bernard now knows the month is July or August. Since Bernard now knows the exact date, his day cannot be 14 (which appears in both July and August). The remaining dates are July 16, August 15, August 17. Albert now knows the date, which means his month must only have one remaining option. That month is July.",
+		"hints": [
+			"Hint 1 (Understanding): Look at the unique dates. 18 only appears in June. 19 only appears in May. If Bernard had 18 or 19, he would know the birthday instantly.",
+			"Hint 2 (Approach): Albert (who knows the month) says he *knows* Bernard doesn't know. Therefore, Albert's month cannot possibly contain a unique date (18 or 19).",
+			"Hint 3 (Partial Logic): Because Albert is certain Bernard doesn't know, you can completely eliminate the months of May and June. Bernard now figures this out too. What does Bernard's next statement tell you about his day?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7f",
+		"title": "The 100 Prisoners and the Single Light Switch",
+		"description": "100 prisoners are in solitary confinement. There is a central room with one light switch (initially off). The warden will pick prisoners at random to enter the room, one at a time. They can toggle the switch or leave it. They cannot communicate. What strategy can they agree on beforehand to guarantee that eventually one prisoner can confidently state, 'All 100 prisoners have visited the room'?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Appoint one prisoner as the 'Counter'. The other 99 prisoners follow this rule: If the light is OFF and you have NEVER turned it ON before, turn it ON. Otherwise, do nothing. The Counter follows this rule: If the light is ON, turn it OFF and add 1 to your mental tally. When the Counter's tally reaches 99, they can announce everyone has visited.",
+		"hints": [
+			"Hint 1 (Understanding): Since they cannot communicate directly, they need to assign asymmetric roles. One person needs to act as the 'leader' or 'counter'.",
+			"Hint 2 (Approach): The 99 regular prisoners should only have one job: leaving a single 'I was here' message. How can they use the switch to do that?",
+			"Hint 3 (Partial Logic): Have regular prisoners only turn the light ON, and only do it ONCE in their lifetime. The counter is the only one allowed to turn the light OFF and keep a tally."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8a",
+		"title": "The Water Bucket Puzzle with Three Irregular Jugs",
+		"description": "You have an 8-liter jug completely filled with water. You also have an empty 5-liter jug and an empty 3-liter jug. There are no markings on the jugs. How can you divide the water so that two of the jugs contain exactly 4 liters each?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "1. Pour 8 to 5 (Leaves: 3, 5, 0). \n2. Pour 5 to 3 (Leaves: 3, 2, 3). \n3. Pour 3 back to 8 (Leaves: 6, 2, 0). \n4. Pour 5 to 3 (Leaves: 6, 0, 2). \n5. Pour 8 to 5 (Leaves: 1, 5, 2). \n6. Pour 5 to 3 to fill it (Leaves: 1, 4, 3). \n7. Pour 3 back to 8 (Leaves: 4, 4, 0).",
+		"hints": [
+			"Hint 1 (Understanding): Since you want exactly 4 liters, and you only have 8, 5, and 3-liter capacities, you must use the 5 and 3 to measure out specific remainders.",
+			"Hint 2 (Approach): If you fill the 5-liter jug from the 8-liter jug, how much is left in the 8-liter jug? (3 liters). What happens next if you pour the 5 into the 3?",
+			"Hint 3 (Partial Logic): The goal is to eventually leave exactly 1 liter or 2 liters isolated in a jug so you can use it as a measuring baseline. Start by pouring 8 to 5, then 5 to 3."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8f",
+		"title": "The 100 Coins with Exactly 10 Heads",
+		"description": "You are in a dark room with a table holding 100 coins. You are told that exactly 10 coins are showing heads, and 90 are showing tails. You cannot see or feel which way the coins are facing. How can you separate the coins into two piles such that both piles have the exact same number of heads?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Create one pile of 10 coins, leaving 90 in the other pile. Then, flip over all 10 coins in the smaller pile. By flipping all coins in the smaller pile, any heads become tails, and any tails become heads, perfectly balancing the number of heads with whatever was left in the larger pile.",
+		"hints": [
+			"Hint 1 (Understanding): This puzzle uses the exact same mathematical logic as the blindfolded card sorting puzzle.",
+			"Hint 2 (Approach): You know there are exactly 10 heads in the entire group. Separate exactly 10 coins into a new, smaller pile.",
+			"Hint 3 (Partial Logic): If your smaller pile of 10 coins contains 3 heads, the larger pile of 90 coins must contain 7 heads. If you flip all the coins in the smaller pile, what happens to those 3 heads and 7 tails?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9a",
+		"title": "The Ants Walking on a Stick Collision Simulation",
+		"description": "100 ants are placed on a 1-meter stick. They walk at 1 cm per second. When two ants collide, they instantly reverse direction. Ants fall off when they reach the ends of the stick. What is the maximum possible time before all ants have fallen off the stick?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "100 seconds. The trick is to realize that when two identical ants collide and reverse, mathematically it is exactly the same as if they had simply passed through each other without interacting. Therefore, the longest time it takes is simply the time it takes for one ant starting at the very edge to walk all the way to the other edge, which is 100 cm at 1 cm/s = 100 seconds.",
+		"hints": [
+			"Hint 1 (Understanding): Don't try to simulate the bounces. It's too complex. Think about the physical characteristics of the ants. They are all identical and walk at the exact same speed.",
+			"Hint 2 (Approach): When Ant A (walking right) hits Ant B (walking left), they bounce and reverse. Now Ant A is walking left and Ant B is walking right.",
+			"Hint 3 (Partial Logic): Since the ants are identical, what is the mathematical difference between them 'bouncing and reversing' versus simply 'phasing right through each other' like ghosts? There is no difference."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7e",
+		"title": "The 12 Marbles and the Unknown Weight Fake",
+		"description": "You have 12 seemingly identical marbles. 11 are the exact same weight, but 1 is a fake and has a different weight (it could be heavier or lighter, you do not know). You have a balance scale. What is the minimum number of weighings needed to find the fake marble and determine if it is heavier or lighter?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "3 weighings. Weigh 4 against 4. If they balance, the fake is in the remaining 4 (weigh 3 of the remaining against 3 known good ones to narrow it down). If they don't balance, take note of which side went down. In the next weighing, swap some marbles between the pans and replace some with known good ones to isolate the fake and its relative weight.",
+		"hints": [
+			"Hint 1 (Understanding): You only have 3 weighings. Weighing them 6 vs 6 won't help you isolate the fake one fast enough.",
+			"Hint 2 (Approach): What happens if you divide the 12 marbles into three groups of 4? Weigh Group A against Group B.",
+			"Hint 3 (Partial Logic): If Group A and Group B balance perfectly, the fake marble must be in the unweighed Group C. If they don't balance, what does the tilting scale tell you about the heavy/light nature of the marbles on it?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e85",
+		"title": "The Three Gods of True, False, and Random",
+		"description": "Three gods A, B, and C are called, in no particular order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is completely random. You must determine the identities of A, B, and C by asking three yes-no questions; each question must be put to exactly one god. The gods understand English, but will answer in their own language, in which the words for yes and no are 'da' and 'ja', in some order. You do not know which word means which.",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The key is to use complex embedded questions. A single question formatted like: 'If I asked you Q, would you say ja?' will always yield a reliable 'ja' for true and 'da' for false, effectively nullifying the da/ja language barrier. First, direct a question to God A to find a God that is definitely NOT Random. Second, ask that identified non-Random God if they are True. Third, ask that same God to identify the remaining two.",
+		"hints": [
+			"Hint 1 (Understanding): You need to formulate a question that bypasses BOTH the Random god's unpredictability and the da/ja translation barrier.",
+			"Hint 2 (Approach): Ask a nested question. If you ask a non-Random God 'If I asked you X, would you say ja?', they are mathematically forced to give a consistent answer regardless of what 'ja' actually translates to.",
+			"Hint 3 (Partial Logic): Use your first question to identify at least one god who is definitely NOT the Random god. For example: 'If I asked you if B is Random, would you say ja?'"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e91",
+		"title": "The 100 Prisoners and the Hidden Numbered Boxes",
+		"description": "100 prisoners numbered 1 to 100 must find their own number in a room containing 100 boxes, each holding a random prisoner's number. Each prisoner can open up to 50 boxes. They cannot communicate after starting. If even one prisoner fails to find their number, all are executed. What strategy gives them a >30% chance of survival?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The pointer-chasing strategy. Prisoner #N goes to box #N. They look at the number inside, say #K. They then go to box #K, and continue this chain. By doing this, they are following random cycles within the permutation of 100 numbers. As long as the longest cycle in the room is not greater than 50 boxes (which happens about 31.1% of the time), every single prisoner will find their number and they will all survive.",
+		"hints": [
+			"Hint 1 (Understanding): If every prisoner guesses randomly, the survival chance is (0.5)^100, which is basically zero. They need a strategy that links their fates together.",
+			"Hint 2 (Approach): The boxes and the numbers inside them form a mathematical permutation. What happens if a prisoner uses the number they find INSIDE a box to tell them which box to open NEXT?",
+			"Hint 3 (Partial Logic): Have Prisoner #1 open Box #1. If it contains #47, they go to Box #47. If that contains #12, they go to Box #12. This creates closed loops. They only die if a loop is longer than 50 boxes."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9c",
+		"title": "The Broken Balance Scale with 100 Weighted Coins",
+		"description": "You have 100 coins of distinctly different weights. You need to find the heaviest and the lightest coin using a balance scale. What is the minimum number of weighings required to guarantee finding both?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "148 weighings. First, divide the 100 coins into 50 pairs. Weigh each pair (50 weighings). The 50 winners go into a 'heavy' pile, and the 50 losers go into a 'light' pile. Now, find the heaviest coin by doing a tournament among the 50 heavy coins (49 weighings). Find the lightest coin by doing a tournament among the 50 light coins (49 weighings). Total = 50 + 49 + 49 = 148.",
+		"hints": [
+			"Hint 1 (Understanding): Finding the heaviest coin requires a tournament (99 weighings). Finding the lightest also requires a tournament (99 weighings). Doing them separately takes 198 weighings. You can do better.",
+			"Hint 2 (Approach): Start by organizing the coins into 50 distinct pairs. Weigh each pair.",
+			"Hint 3 (Partial Logic): Those 50 weighings create a 'Winner' bracket of 50 heavy coins, and a 'Loser' bracket of 50 light coins. The absolute heaviest coin MUST be in the winner bracket. The absolute lightest MUST be in the loser bracket."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2ea2",
+		"title": "The Three Utilities Graph Bipartite Crossing",
+		"description": "There are 3 houses and 3 utility stations (Gas, Water, Electricity) on a flat piece of paper. You must draw lines to connect every house to every utility without any lines crossing. Is it possible?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "No, it is topologically impossible on a 2D plane. This problem represents the complete bipartite graph K3,3. According to Kuratowski's Theorem, a graph is planar (can be drawn without crossing lines) only if it does not contain a subgraph homeomorphic to K5 or K3,3. You would need a 3D space or a torus (donut shape) to solve it without intersections.",
+		"hints": [
+			"Hint 1 (Understanding): Don't spend too long trying to draw it. This is a famous problem in topological graph theory known as the 'Water, Gas, and Electricity' problem.",
+			"Hint 2 (Approach): You are trying to draw the complete bipartite graph K3,3 on a 2D plane. What does Kuratowski's Theorem state about planar graphs?",
+			"Hint 3 (Partial Logic): It is mathematically impossible. No matter how you route the 8th line, the 9th line will always be trapped by the boundary created by the others. You would need a 3D surface, like a donut (torus), to solve it."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e79",
+		"title": "The Missing Dollar Accounting Illusion",
+		"description": "Three people pay $10 each for a $30 room. The manager realizes it's $25, giving $5 to the bellboy to return. The bellboy keeps $2 and gives $1 back to each person. Now each paid $9 ($27 total), plus the bellboy's $2 equals $29. Where is the missing dollar?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "There is no missing dollar. The math in the question is deliberately flawed. The $27 paid by the guests already includes the $2 kept by the bellboy. ($25 for the room + $2 for the bellboy = $27 paid).",
+		"hints": [
+			"Do not trust the arithmetic provided in the puzzle's final sentence. It is designed to mislead you.",
+			"Track the exact location of all the physical cash. Where is the $30 right now?",
+			"The guests paid $27 total out of pocket. Out of that $27, the manager has $25 and the bellboy has $2. Why would you ADD the bellboy's $2 to the $27?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7a",
+		"title": "The Clock Face Division into Equal Sums",
+		"description": "Draw two straight lines across the face of a clock so that the sums of the numbers in each of the three resulting regions are exactly equal.",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The total sum is 78, so each region must equal 26. Line 1: Between 10/11 and 2/3 (Region has 11, 12, 1, 2 = 26). Line 2: Between 8/9 and 4/5 (Region has 9, 10, 3, 4 = 26). The final region has 5, 6, 7, 8 = 26.",
+		"hints": [
+			"First, calculate the total sum of all the numbers on the clock face (1 + 2 + 3... + 12).",
+			"If you divide the total sum by 3, you will find the exact mathematical target that each region must equal.",
+			"Each region must equal 26. Look for groups of consecutive numbers on the clock dial that add up to exactly 26."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e80",
+		"title": "The Binary Tasters and the 1000 Poisoned Barrels",
+		"description": "You have 1000 barrels of wine, but exactly 1 barrel is poisoned. The poison takes exactly 24 hours to kill anyone who drinks it. You have 10 tasters and exactly 24 hours to find the poisoned barrel. How do you do it?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Use binary numbers. Number the barrels 1 to 1000. Convert these numbers to 10-bit binary. Assign each of the 10 tasters to a specific bit position (1st bit, 2nd bit... 10th bit). A taster drinks from a barrel if and only if that barrel's binary number has a '1' in their assigned bit position. After 24 hours, look at who died. The dead tasters represent the '1's in the binary number of the poisoned barrel.",
+		"hints": [
+			"Hint 1 (Understanding): You cannot assign 1 taster to just 100 barrels. You need to overlap which barrels each taster drinks from.",
+			"Hint 2 (Approach): Think about the number of tasters (10). What is 2 to the power of 10? How does that mathematically relate to the 1000 barrels?",
+			"Hint 3 (Partial Logic): Number the barrels from 1 to 1000 and convert those numbers into binary. Assign each taster to represent one specific binary digit (bit)."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e92",
+		"title": "The Sum and Product Mathematicians' Impossible Puzzle",
+		"description": "Two integers X and Y are chosen such that 2 <= X < Y <= 99. Mathematician P is given their product. Mathematician S is given their sum. They have this conversation: \nP: 'I don't know the numbers.' \nS: 'I knew you didn't know them.' \nP: 'Now I know the numbers.' \nS: 'Now I know them too.' \nWhat are the numbers?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "X = 4, Y = 13. P doesn't know means the product has more than one set of factors. S knows P doesn't know, meaning S's sum cannot be expressed as the sum of two primes (Goldbach's conjecture). By mapping out all possible sums that fit this criteria, and tracking how P and S eliminate options based on each other's statements, only the pair (4, 13) leaves a unique, solvable path.",
+		"hints": [
+			"Hint 1 (Understanding): When P says 'I don't know', it means the product can be factored in more than one way (e.g., 12 could be 2x6 or 3x4).",
+			"Hint 2 (Approach): When S says 'I *knew* you didn't know', it means S's sum CANNOT possibly be the sum of two prime numbers. (If the numbers were 3 and 5, the sum is 8, the product is 15. P would instantly know it was 3 and 5).",
+			"Hint 3 (Partial Logic): Look for a sum (S) that is an odd number (since all evens are the sum of two primes) and cannot be constructed by adding 2 + a prime. 11 is the first candidate."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e98",
+		"title": "The Hat Color Guessing with Infinite Alternating Colors",
+		"description": "An infinite number of prisoners are lined up facing one direction. Each is wearing a black or white hat. They can see all infinitely many hats in front of them, but not their own or the ones behind. They must simultaneously shout their hat color. What strategy guarantees only a finite number of prisoners guess wrong?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "This relies on the Axiom of Choice. The prisoners define an equivalence relation where two sequences of hats are 'equivalent' if they differ in only a finite number of places. They agree beforehand on one representative sequence from every possible equivalence class. When in line, a prisoner sees the sequence ahead, identifies its equivalence class, and guesses based on the agreed representative sequence. Because the representative sequence differs from the actual sequence by only a finite number of hats, only a finite number of prisoners will be wrong.",
+		"hints": [
+			"Hint 1 (Understanding): Because the line is infinite and they must guess simultaneously, counting parity (even/odd) from the back is impossible. There is no 'back' of the line.",
+			"Hint 2 (Approach): This is a pure mathematics puzzle requiring Set Theory and the Axiom of Choice. The prisoners can see the entire infinite sequence in front of them, minus their own and the ones behind.",
+			"Hint 3 (Partial Logic): The prisoners group all possible infinite combinations of hats into 'equivalence classes' where sequences only differ by a finite number of hats. They agree to always guess based on a pre-chosen 'master sequence' for whatever class they see."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e99",
+		"title": "The Angel, Devil, and Mortal Circular Questioning",
+		"description": "You meet three beings: an Angel (always tells truth), a Devil (always lies), and a Mortal (answers randomly). They look identical. You can ask exactly three yes/no questions to determine who is who. Each question must be directed to one specific being. How do you find out?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Similar to the 'Hardest Logic Puzzle Ever'. Question 1 is directed to Being A to find someone who is NOT the Mortal. 'If I asked you if B is the Mortal, would you say yes?' Based on the answer, you can confidently identify either B or C as a non-Random being (either Angel or Devil). Question 2 is asked to that identified non-Random being to determine if they are the Angel or Devil. Question 3 is asked to the same being to identify the remaining two.",
+		"hints": [
+			"Hint 1 (Understanding): You cannot waste a single question on the Mortal (Random), because their answer gives you zero reliable information. Your first goal is to find someone who is definitively NOT the Mortal.",
+			"Hint 2 (Approach): Use a hypothetical embedded question to force the Angel and Devil to give you the same useful information.",
+			"Hint 3 (Partial Logic): Ask Being A: 'If I asked you if B is the Mortal, would you say yes?' If A says 'Yes', then C is definitely not the Mortal. If A says 'No', then B is definitely not the Mortal."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6d",
+		"title": "The Snail's Journey Up the Slippery Well",
+		"description": "A snail is at the bottom of a 30-foot well. Each day it climbs up 3 feet, but at night it slips back down 2 feet. How many days will it take for the snail to reach the top?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "28 days. It gains 1 foot per day. On the end of the 27th day, it is at 27 feet. On the 28th day, it climbs 3 feet and reaches the 30-foot top and escapes before the night falls.",
+		"hints": [
+			"The snail's net progress is 1 foot per 24 hours, but don't just divide 30 by 1.",
+			"Think carefully about what happens on the final day. Does the snail slip down if it has already reached the top during the day?",
+			"Calculate how many days it takes for the snail to reach exactly 27 feet."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e71",
+		"title": "The Non-Uniform Ropes Burning for 45 Minutes",
+		"description": "You have two non-uniform ropes. Each takes exactly 1 hour to burn completely, but they burn at inconsistent rates. How do you measure exactly 45 minutes using a lighter?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Light Rope A at both ends, and light Rope B at one end. When Rope A burns out completely, exactly 30 minutes have passed. At that exact moment, light the other end of Rope B. Rope B will burn for exactly 15 more minutes. 30 + 15 = 45 minutes.",
+		"hints": [
+			"You cannot fold or cut the ropes to measure time, because they burn unevenly (e.g., half the rope might burn in 10 minutes, and the other half in 50 minutes).",
+			"If you light one rope at BOTH ends simultaneously, exactly how long will it take for the entire rope to turn to ash?",
+			"Light Rope A at both ends, and light Rope B at only one end. What specific action should you take the moment Rope A completely finishes burning?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7b",
+		"title": "The Six Matchsticks Equilateral Triangles",
+		"description": "Arrange exactly 6 equal-length matchsticks so that they form exactly 4 equilateral triangles. The matchsticks cannot be broken or bent.",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Build a 3D shape instead of a 2D one. Arrange the 6 matchsticks to form a regular tetrahedron (a 3D pyramid with a triangular base).",
+		"hints": [
+			"If you try to solve this by laying the matchsticks flat on a table, you will always run out of sticks or create intersecting lines.",
+			"The puzzle does not state that the triangles must remain flat on a 2D plane.",
+			"How can you use the third dimension to build a pyramid-like structure?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e95",
+		"title": "The 13 Coins and the Balance Scale Comprehensive Deduction",
+		"description": "You have 13 coins. 12 are identical in weight, but 1 is counterfeit (either heavier or lighter). You have a balance scale. Using exactly 3 weighings, how can you find the counterfeit coin and determine whether it is heavy or light?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Divide coins into 3 groups: A(4), B(4), C(5). Weigh A vs B. If they balance, the fake is in C (use the 2 remaining weighings to find 1 fake among 5 against known good coins). If A vs B does not balance, take note of which side is heavy. For the second weighing, mix the coins: put 3 from A and 1 from B on the left, and 1 from A and 3 known good coins on the right. Track the scale's tipping direction to isolate the fake based on intersections of possibilities.",
+		"hints": [
+			"Hint 1 (Understanding): A balance scale has 3 outcomes: Left down, Right down, or Balanced. Three weighings gives you 3x3x3 = 27 possible outcomes. You have 26 possibilities (13 coins x 2 states: heavy or light).",
+			"Hint 2 (Approach): Do not weigh 6 against 6. Start by dividing the coins into groups of 4, 4, and 5. Weigh 4 against 4.",
+			"Hint 3 (Partial Logic): If the first 4v4 tips, you know the 5 unweighed coins are real. For the second weighing, you must mix suspected heavy coins, suspected light coins, and known real coins on the pans."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9b",
+		"title": "The Omniscient Oracle State Deduction",
+		"description": "You have a machine with three states: A, B, and C. It accepts 1 or 0 as input. It always outputs 1 or 0. You have its state diagram showing how inputs transition the states and generate outputs, but you don't know what state it is currently in. How do you design an input sequence that definitively tells you the current state?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "This requires finding a 'Distinguishing Sequence' or 'Homing Sequence' in automata theory. By feeding a specific sequence of inputs, the sequence of outputs will be uniquely different depending on the initial state. The exact sequence depends on the specific state transition diagram, utilizing decision trees to narrow down the possible initial states until only one remains.",
+		"hints": [
+			"Hint 1 (Understanding): You are trying to find a 'Homing Sequence' (a concept from finite state machines). You need an input sequence that produces a completely unique output pattern for each of the 3 starting states.",
+			"Hint 2 (Approach): Create a tree diagram. Start by feeding a '0'. Write down what the output would be if the machine started in A, B, or C.",
+			"Hint 3 (Partial Logic): Keep adding inputs (0s and 1s) to your sequence until the sequence of outputs for starting state A is distinct from B, and distinct from C."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6a",
+		"title": "The Three-and-Five Liter Water Jug Calibration",
+		"description": "You have a 3-liter jug and a 5-liter jug, and an unlimited supply of water. How can you measure exactly 4 liters of water?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "1. Fill the 5L jug. 2. Pour water from the 5L jug into the 3L jug until it's full, leaving exactly 2L in the 5L jug. 3. Empty the 3L jug. 4. Pour the 2L from the 5L jug into the 3L jug. 5. Fill the 5L jug again. 6. Pour water from the 5L jug into the 3L jug until it's full (which takes exactly 1L). The 5L jug now contains exactly 4L of water.",
+		"hints": [
+			"You can't measure 4 liters directly, but you can use the difference between the capacities of the two jugs.",
+			"What happens if you completely fill the 5L jug and use it to fill the 3L jug? How much water is left in the 5L jug?",
+			"Once you have exactly 2 liters isolated, how can you use the empty 3L jug to store it and build towards 4 liters?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e86",
+		"title": "The Lineup of Red and Blue Hat Prisoners",
+		"description": "100 prisoners are lined up facing forward. A warden puts a red or blue hat on each person. They can see the hats of everyone in front of them, but not their own or the people behind them. Starting from the back, each must guess their own hat color out loud. If they are right, they live. What strategy guarantees 99 prisoners live?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The prisoner at the very back (who sees 99 hats) agrees to count the number of RED hats they see. If the number is EVEN, they say 'Red'. If the number is ODD, they say 'Blue'. This might kill the first prisoner, but gives the parity of red hats to the rest of the line. The 99th prisoner looks at the red hats in front. If the parity changed, their hat must be red. If it didn't, their hat is blue. This chain reaction saves the remaining 99.",
+		"hints": [
+			"Hint 1 (Understanding): The prisoner at the very back can see 99 hats. He has a 50/50 chance of living, but his answer can contain coded mathematical information for the rest of the line.",
+			"Hint 2 (Approach): How can the last prisoner communicate the total ratio of Red vs Blue hats? Look at parity (even vs odd numbers).",
+			"Hint 3 (Partial Logic): The last prisoner counts the number of RED hats he sees. If it's an even number, he says 'Red'. If odd, he says 'Blue'. How does the 99th prisoner use this parity info to save himself?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8d",
+		"title": "The Weighted Dice and the Fair Game Strategy",
+		"description": "You are playing a game with a biased coin that lands on Heads 60% of the time and Tails 40% of the time. You want to use this coin to make a completely fair 50/50 decision. How can you use this biased coin to simulate a perfectly fair coin toss?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Toss the coin twice. If the result is Heads-Heads or Tails-Tails, discard the result and toss twice again. If the result is Heads-Tails, call it 'Choice A'. If the result is Tails-Heads, call it 'Choice B'. Because the probability of HT (0.6 * 0.4 = 0.24) is exactly the same as the probability of TH (0.4 * 0.6 = 0.24), this guarantees a perfectly fair 50/50 outcome.",
+		"hints": [
+			"Hint 1 (Understanding): A single flip is biased (60/40). But what if you look at the combined outcomes of flipping the coin twice in a row?",
+			"Hint 2 (Approach): The probability of getting Heads-Heads is 0.6 * 0.6 = 0.36. The probability of Tails-Tails is 0.16. These don't help balance the game. What about the mixed results?",
+			"Hint 3 (Partial Logic): Calculate the probability of getting Heads then Tails. Now calculate the probability of getting Tails then Heads. What do you notice about these two numbers?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9e",
+		"title": "The Conway Peg Solitaire Restriction Matrix",
+		"description": "On an infinite checkerboard, there is a horizontal line. Below the line, you can place as many pegs as you want. You jump pegs over each other (removing the jumped peg) like in Solitaire, trying to move a peg as high above the horizontal line as possible. What is the highest row you can reach?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Row 4 is the maximum possible. Row 5 is mathematically impossible to reach. John Conway proved this using a resource weighting system where each peg is assigned a value based on the golden ratio. He showed that the total 'value' required to get a piece to the 5th row exceeds the maximum possible total value of an infinite number of pieces placed below the line.",
+		"hints": [
+			"Hint 1 (Understanding): Every time you make a jump, you lose a peg. Reaching higher rows requires an exponentially larger number of pegs acting as 'fuel' below the line.",
+			"Hint 2 (Approach): To prove a limit, mathematician John Conway assigned a mathematical 'value' to every square on the board, where the target square is worth 1.",
+			"Hint 3 (Partial Logic): Every jump is calculated so that the total 'value' of pegs on the board can never increase. The total value of an infinite number of pegs below the line adds up to a specific number. To reach Row 5, you need a starting value higher than what infinity can provide."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6f",
+		"title": "The Lily Pad Exponential Growth Dilemma",
+		"description": "A lily pad patch doubles in size every day. If it takes 48 days for the patch to cover the entire pond, how long would it take to cover half the pond?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "47 days. Since the lily pads double in size every day, the pond was half full the day before it was completely full.",
+		"hints": [
+			"Do not divide 48 days by 2. The growth is not linear.",
+			"Think backwards from the final day instead of forwards from day 1.",
+			"If the pond is 100% full on Day 48, and it doubles in size every day, what percentage full was it on the day right before it?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e7d",
+		"title": "The Four-Person Bridge and Torch Night Crossing",
+		"description": "Four people need to cross a rickety bridge at night. They have only one torch. The bridge can hold a maximum of two people at a time. Any party that crosses, either one or two people, must have the torch with them. The four people take 1, 2, 5, and 10 minutes respectively to cross the bridge. When two people cross together, they must move at the pace of the slower person. What is the minimum time required for all four to cross?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "17 minutes. 1 and 2 cross together (2 mins). 1 returns with the torch (1 min). 5 and 10 cross together (10 mins). 2 returns with the torch (2 mins). 1 and 2 cross together (2 mins). Total time: 2 + 1 + 10 + 2 + 2 = 17 minutes.",
+		"hints": [
+			"Hint 1 (Understanding): If the fastest person keeps escorting the slowest people individually, they will use up a lot of time returning the torch.",
+			"Hint 2 (Approach): How can you get the two slowest people (5 and 10) across the bridge at the SAME time to minimize their combined time impact?",
+			"Hint 3 (Partial Logic): For 5 and 10 to cross together, someone faster needs to already be on the other side to bring the torch back. Try sending your fastest pair across first."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e84",
+		"title": "The 100 Open and Closed Locker Toggles",
+		"description": "There are 100 closed lockers in a hallway. Person 1 walks by and opens every locker. Person 2 walks by and closes every 2nd locker (2, 4, 6...). Person 3 changes the state of every 3rd locker. This continues until Person 100 changes the state of the 100th locker. After all 100 people have walked by, which lockers are open?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The perfect squares (1, 4, 9, 16, 25, 36, 49, 64, 81, 100). A locker is toggled once for every factor of its number. Most numbers have an even number of factors (in pairs). Perfect squares have an odd number of factors because one factor is multiplied by itself. An odd number of toggles leaves the locker open.",
+		"hints": [
+			"Hint 1 (Understanding): A locker changes its state (open/close) every time a person whose number is a factor of the locker's number walks by.",
+			"Hint 2 (Approach): For example, Locker 12 is touched by persons 1, 2, 3, 4, 6, and 12. That's an even number of touches, so it ends up closed. What type of numbers have an odd number of factors?",
+			"Hint 3 (Partial Logic): Lockers that end up open must be toggled an odd number of times. Look for numbers that have a square root that is a whole integer."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e90",
+		"title": "The Blue-Eyed Islanders Simultaneous Departure",
+		"description": "100 perfectly logical people with blue eyes live on an island. They cannot communicate or look in a mirror. If a person figures out they have blue eyes, they must leave the island at midnight. One day, a visiting guru announces to everyone: 'I can see at least one person with blue eyes.' What happens?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Nothing happens for 99 days. On the 100th midnight, all 100 blue-eyed people leave the island simultaneously. Logic: If there was 1 blue-eyed person, they would see 0 blue eyes and leave on Day 1. If 2, they see 1, wait for them to leave on Day 1. When they don't, both realize they have blue eyes and leave on Day 2. By induction, 100 blue-eyed people will figure it out on the 100th day.",
+		"hints": [
+			"Hint 1 (Understanding): Start with the simplest scenario. Imagine there is exactly ONE person with blue eyes on the island. What happens on the very first night after the guru speaks?",
+			"Hint 2 (Approach): Now imagine there are exactly TWO people with blue eyes. They see each other. They both expect the other person to leave on Day 1. When nobody leaves on Day 1, what do they realize?",
+			"Hint 3 (Partial Logic): This is a problem of mathematical induction. If 2 people figure it out by Day 2, and 3 people by Day 3, what is the logical conclusion for a population of 100 people?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e97",
+		"title": "The Coin Matrix Parity Flipping Trick for Two Prisoners",
+		"description": "A warden places 64 coins on a chessboard, randomizing heads/tails. He hides a key under one square and shows Prisoner 1 where it is. Prisoner 1 must flip exactly one coin on the board. Then, Prisoner 2 is brought in, looks at the board, and must point to the square with the key. What mathematical strategy allows them to win?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Use binary XOR parity (Hamming codes). Number the squares 0 to 63 in binary. Calculate the cumulative XOR sum of the positions of all coins showing Heads. Let's call this sum 'S'. Let the target square with the key be 'K'. Prisoner 1 must flip the coin at position 'X' such that S XOR X = K (which means X = S XOR K). When Prisoner 2 walks in, they simply calculate the XOR sum of all Heads, and that exact number will be the location of the key.",
+		"hints": [
+			"Hint 1 (Understanding): Prisoner 1 must encode the 6-bit location (0 to 63) of the key into the overall pattern of the board by changing exactly one bit.",
+			"Hint 2 (Approach): This requires a parity check system like Hamming Codes. Imagine numbering the squares 0 to 63 in binary. Look only at the coins showing Heads.",
+			"Hint 3 (Partial Logic): Calculate the cumulative XOR (exclusive OR) sum of the positions of all the Heads. Let's call that sum 'S'. The key is at 'K'. Prisoner 1 flips the coin that makes the new XOR sum equal to K."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e82",
+		"title": "The Pirate Captain's Gold Coin Distribution Strategy",
+		"description": "5 extremely rational, greedy pirates (A, B, C, D, E in order of rank, A is highest) are dividing 100 gold coins. The highest-ranking pirate proposes a distribution. All pirates vote (including the proposer). If 50% or more vote YES, the proposal is accepted. If it fails, the proposer is thrown overboard and the next highest pirate proposes. What proposal should A make to maximize his gold and stay alive?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "A should propose: 98 for A, 0 for B, 1 for C, 0 for D, 1 for E. Work backwards. If it's just D and E, D proposes 100 for D, 0 for E (and wins 1 to 1). So E gets 0 if it goes to D. If C, D, E remain, C proposes 99 for C, 0 for D, 1 for E (E votes yes because 1 > 0). If B, C, D, E remain, B proposes 99 for B, 1 for D, 0 for C, 0 for E. To win, A must buy the votes of the people who get 0 under B's plan, which are C and E. So A gives 1 to C and 1 to E.",
+		"hints": [
+			"Hint 1 (Understanding): Do not try to solve this from A's perspective first. Work backwards. What happens if A, B, and C die, and only D and E are left?",
+			"Hint 2 (Approach): If it's just D and E, D votes for himself (50%) and takes everything. Knowing this, what minimum amount does C need to offer E to get his vote?",
+			"Hint 3 (Partial Logic): Fast forward back to A. A needs 3 total votes (including his own). He needs to find the two pirates who get exactly 0 coins under B's hypothetical plan and offer them 1 coin each."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2ea3",
+		"title": "The Sequential Liar Paradox with Four Guards",
+		"description": "Four guards stand in a line. \nGuard 1 says: 'Guard 2 is lying.' \nGuard 2 says: 'Guard 3 is lying.' \nGuard 3 says: 'Guard 4 is lying.' \nGuard 4 says: 'We are all lying.' \nWho is telling the truth?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Guard 3 is telling the truth. Assume Guard 4 is true; then his statement 'all are lying' is false (paradox). Thus, Guard 4 is lying. Since Guard 4 is lying, Guard 3's statement 'Guard 4 is lying' is true. Since Guard 3 is true, Guard 2's statement 'Guard 3 is lying' is false. Since Guard 2 is false, Guard 1's statement 'Guard 2 is lying' is true. So, Guards 1 and 3 are telling the truth, and 2 and 4 are lying.",
+		"hints": [
+			"Hint 1 (Understanding): This is a logic chain. Do not start at Guard 1. Start at the end, with the most extreme and absolute statement.",
+			"Hint 2 (Approach): Look at Guard 4: 'We are all lying.' What happens if you assume this statement is TRUE?",
+			"Hint 3 (Partial Logic): If Guard 4 is telling the truth, then his statement 'we are ALL lying' is a paradox (because he would be telling the truth). Therefore, Guard 4 MUST be lying. If Guard 4 is a liar, what does that make Guard 3?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2ea4",
+		"title": "The Modified Two Envelopes Infinite Expectation Paradox",
+		"description": "You are given two envelopes, one contains twice as much money as the other. You open Envelope A and find $100. You are offered to switch to Envelope B. The expected value calculation suggests switching is always beneficial: (0.5 * $50) + (0.5 * $200) = $125 > $100. But before opening, the envelopes are symmetrical. Where is the flaw in the mathematics?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The flaw is an assumption of a uniform probability distribution over all positive real numbers, which is mathematically impossible (it would integrate to infinity, not 1). Without knowing the prior distribution of the amounts placed in the envelopes, you cannot validly calculate an expected value. If a proper, finite probability distribution is defined, the paradox resolves and the expected value of switching becomes neutral.",
+		"hints": [
+			"Hint 1 (Understanding): The math (0.5 * 50) + (0.5 * 200) = 125 seems flawless. But if switching is always profitable, you could switch back and forth infinitely and generate infinite expected value, which is absurd.",
+			"Hint 2 (Approach): The formula assumes that the probability of the other envelope holding $50 is EXACTLY equal to the probability of it holding $200. Is this assumption valid for all numbers up to infinity?",
+			"Hint 3 (Partial Logic): To have a 50/50 chance for every single possible amount of money, you would need a 'uniform probability distribution' across all positive numbers. Mathematically, this is impossible because the probabilities wouldn't add up to 100%."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6b",
+		"title": "The Truth, the Lie, and the Broken Signpost",
+		"description": "You are at a fork in the road. One path leads to the village of truth-tellers, the other to the village of liars. A person from one of the villages is standing there, but you don't know which one. What one question can you ask to find the path to the truth-tellers' village?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Ask: 'Which path would a person from the other village say leads to the truth-tellers village?' Both the liar and the truth-teller will point to the path leading to the liars' village. You then take the opposite path.",
+		"hints": [
+			"If you ask 'Are you a truth-teller?', both will say 'Yes', which doesn't help you choose a path.",
+			"You need to formulate a single question where both the liar and the truth-teller are forced to give you the exact same answer.",
+			"What happens if you ask the person to tell you what the *other* type of person would say?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e70",
+		"title": "The Blindfolded Coin Flipper's Equal Heads Strategy",
+		"description": "You are blindfolded with 100 coins on a table. 10 are heads up, 90 are tails up. You cannot feel which side is up. Split the coins into two piles such that both piles have the exact same number of heads facing up.",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Separate 10 coins into a new pile. Then, flip all 10 coins in that new pile. Both piles will now have the exact same number of heads.",
+		"hints": [
+			"You cannot use your senses to solve this. You must rely purely on mathematical logic and the total count of 10 heads.",
+			"What happens if you randomly separate exactly 10 coins into a new, smaller pile?",
+			"If the new pile of 10 coins happens to have 'X' heads in it, how many heads are left in the big pile of 90 coins? What action can you do to the small pile to match it?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e75",
+		"title": "The Circular Track Runner Overtaking Puzzle",
+		"description": "Two runners are running on a circular track in the same direction. Runner A completes a lap in 4 minutes, and Runner B completes a lap in 6 minutes. When will Runner A exactly overtake Runner B for the first time?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "12 minutes. In 12 minutes, Runner A will have completed 3 laps, and Runner B will have completed 2 laps. Runner A will be exactly one full lap ahead, overtaking B.",
+		"hints": [
+			"Do not try to calculate their actual running speeds. Focus on the time it takes to complete full laps.",
+			"For Runner A to 'overtake' Runner B, Runner A must have completed exactly one more full lap than Runner B.",
+			"Look for the least common multiple (LCM) of their lap times to find when they sync up."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e78",
+		"title": "The Three Hats and the Blind Wise Man",
+		"description": "A king has 3 black hats and 2 white hats. He places a hat on each of 3 wise men. They can see others' hats but not their own. The first and second men state they don't know their hat color. The third, who is blind, correctly states his hat color. What color is it?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Black. If the blind man had a white hat, and the 2nd had a white hat, the 1st would know he has black. Since the 1st didn't know, there's at most 1 white hat between the 2nd and 3rd. Since the 2nd didn't know, the 3rd cannot have a white hat (otherwise the 2nd would know he had black). Thus, the 3rd must have Black.",
+		"hints": [
+			"There are only 2 white hats total. If the first man looked and saw two white hats on the other men, he would instantly know his hat was black.",
+			"Since the first man stayed silent, the second and third men must be wearing either one white and one black hat, or two black hats.",
+			"Put yourself in the shoes of the second man. He knows the first man's silence means there aren't two white hats. If he looked at the blind man and saw a white hat, what would he deduce?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e83",
+		"title": "The Jealous Husbands and Wives River Crossing",
+		"description": "Three jealous husbands and their wives need to cross a river using a boat that holds only two people. The rule is: no woman can ever be in the presence of another man unless her own husband is also present. How can all six people cross the river safely?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "11 trips total. Let couples be H1-W1, H2-W2, H3-W3. \n1. W1 and W2 cross. \n2. W1 returns. \n3. W1 and W3 cross. \n4. W1 returns. \n5. H2 and H3 cross. \n6. H2 and W2 return. \n7. H1 and H2 cross. \n8. W3 returns. \n9. W1 and W2 cross. \n10. W2 returns. \n11. W2 and W3 cross.",
+		"hints": [
+			"Hint 1 (Understanding): The key constraint is that a wife can never be with another man without her husband. This means wives should cross together, or complete couples should cross together.",
+			"Hint 2 (Approach): Start by sending two wives across the river. Who should bring the boat back? It must be one of the wives.",
+			"Hint 3 (Partial Logic): At some point, when the husbands cross, they must not leave their wives stranded on the starting side with other men. Husbands and wives will have to swap places on the far shore."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e87",
+		"title": "The Camel's Optimal Banana Transport Strategy",
+		"description": "You have 3000 bananas and a camel. The market is 1000 miles away. The camel can carry a maximum of 1000 bananas at a time, but eats 1 banana for every mile it walks. What is the maximum number of bananas you can deliver to the market?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "533 bananas. The camel must make multiple trips to set up checkpoints. \nTrip 1 (0 to 200 miles): Carry 1000, drop 600, return (uses 400). Repeat twice more. At mile 200, you have 2000 bananas.\nTrip 2 (200 to 533 miles): Carry 1000, drop 334, return (uses 666). Repeat once. At mile 533, you have 1001 bananas. \nFinal leg (533 to 1000): The camel takes 1000 bananas, walks the remaining 467 miles, eating 467 bananas. 1000 - 467 = 533 bananas remaining.",
+		"hints": [
+			"Hint 1 (Understanding): The camel cannot carry 3000 bananas at once, and if it walks all the way to the market with 1000, it eats them all. It must build intermediate stashes/checkpoints.",
+			"Hint 2 (Approach): The camel should move bananas in stages. It takes 5 trips (3 forward, 2 back) to move the full 3000 bananas to the very first checkpoint.",
+			"Hint 3 (Partial Logic): Where should the first checkpoint be? You want to drop exactly 1000 bananas from the total inventory so the camel has one less round-trip to make on the next leg. Set the checkpoint at 200 miles."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e94",
+		"title": "The Infinite Grid Escape Constraint",
+		"description": "A man is lost on an infinite 2D grid. He takes a random walk, choosing North, South, East, or West with equal probability at each intersection. What is the probability that he will eventually return to his exact starting point if he walks infinitely? What if the grid was 3D?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "In a 2D grid, the probability of returning to the origin is exactly 1 (100%). However, in a 3D grid (like a bird flying randomly), the probability of returning to the starting point drops to approximately 0.34 (34%). This is known as Pólya's Random Walk Theorem.",
+		"hints": [
+			"Hint 1 (Understanding): In a 2D grid, even though he might wander extremely far away, the number of paths that lead back to the center grows at a rate that mathematically guarantees a return eventually.",
+			"Hint 2 (Approach): Think about the total number of possible paths versus the number of paths that return to zero. How does adding an Up/Down Z-axis in 3D change the 'volume' of possible paths?",
+			"Hint 3 (Partial Logic): In 3D space, the number of directions increases, causing the 'volume' of the escape space to grow much faster than the 2D 'area'. The 2D probability is 100%, but 3D is only a fraction."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2ea0",
+		"title": "The Token Passing Protocol in a Circular Prison",
+		"description": "100 prisoners sit in a circle. They are given indistinguishable black or white tokens. They can only pass tokens to their immediate neighbors simultaneously in synchronized rounds. They must figure out the total number of black tokens in the room. What protocol guarantees they find out?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Prisoners can encode the count into the timing and movement of tokens. For example, a token moving clockwise can represent a '1', and counter-clockwise a '0'. Since the circle size is known (100), they can use a phase-based protocol where a specific token acts as an aggregator, accumulating the sum as it makes a full revolution around the circle, resolving collisions deterministically.",
+		"hints": [
+			"Hint 1 (Understanding): The tokens are identical. You cannot put a mark on a token to signify 'I've seen 5 black tokens'. You must use the *movement* of the tokens to encode data.",
+			"Hint 2 (Approach): The prisoners know there are 100 people. This means they can use 'rounds' as a synchronized clock. What if a token passing clockwise means one thing, and counter-clockwise means another?",
+			"Hint 3 (Partial Logic): The prisoners can agree to make one specific token an 'accumulator'. As it travels the full 100-person circle, prisoners who started with a black token can manipulate its speed or direction to 'add' their count to the system."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e6e",
+		"title": "The Alternating Full and Empty Glasses Minimum Moves",
+		"description": "There are 6 glasses in a row. The first 3 are full of water, and the next 3 are empty. By moving only one glass, how can you make them alternate between full and empty?",
+		"difficulty": "Easy",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Pick up the 2nd glass (which is full) and pour its water into the 5th glass (which is empty). Then put the 2nd glass back in its original position.",
+		"hints": [
+			"You are only allowed to touch and move a single glass. This means you cannot rearrange their positions on the table.",
+			"Moving the glass itself isn't the only way to move what's inside it.",
+			"What if you pick up the second glass (which is full) and interact with the fifth glass (which is empty)?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e88",
+		"title": "The Number Guessing Game with a Single Lie",
+		"description": "I am thinking of a number between 1 and 16. You can ask yes/no questions to figure it out. However, I am allowed to lie to you exactly ONCE during the game (but I don't have to). What is the minimum number of questions needed to guarantee you find the number?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "7 questions. This is equivalent to Ulam's game or error-correcting codes (Hamming codes). 4 questions are needed to find a number out of 16 without lies. To correct for 1 error (lie), you need additional parity check questions. By carefully structuring the sets of numbers in each question, 7 questions are mathematically sufficient to pinpoint both the lie (if any) and the correct number.",
+		"hints": [
+			"Hint 1 (Understanding): Since there is 1 lie allowed, standard binary search (asking 'Is it greater than 8?') is dangerous, because a lie will send you down the wrong path forever.",
+			"Hint 2 (Approach): You need questions that check on the validity of previous questions. Think of it like a Venn diagram or error-correcting computer codes.",
+			"Hint 3 (Partial Logic): Instead of asking if a number is greater/less than, ask if the number belongs to specific overlapping sets (e.g., 'Is it in the set {1,2,3,4,5,6,7,8}?')."
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8b",
+		"title": "The Three Siblings and the Modified Liar Paradox",
+		"description": "You meet three siblings: Alice, Bob, and Charlie. One always tells the truth, one always lies, and one sometimes lies and sometimes tells the truth. \nAlice says: 'Bob always lies.'\nBob says: 'Charlie sometimes lies.'\nCharlie says: 'Alice always tells the truth.'\nWho is who?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "Charlie is the Liar. Bob is the Truth-teller. Alice is the Random one. If Charlie tells the truth, Alice tells the truth, but they can't both be the truth-teller. So Charlie's statement is false. If Charlie is the liar, then Alice's statement is false (so Alice is not the Truth-teller). This leaves Bob as the Truth-teller. Bob says 'Charlie sometimes lies', which is true because Charlie is the Liar (who technically 'sometimes' lies, as in all the time).",
+		"hints": [
+			"Hint 1 (Understanding): Look for direct contradictions. If Charlie tells the truth, then Alice tells the truth. Can two people be the 'always tells the truth' sibling? No.",
+			"Hint 2 (Approach): Since Charlie cannot be telling the truth, his statement is false. What does this immediately tell you about Alice's identity?",
+			"Hint 3 (Partial Logic): Since Alice's statement ('Bob always lies') must be false, Bob cannot be the Liar. If Bob is the Truth-teller, does his statement align with Charlie being the Liar?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e81",
+		"title": "The 25 Horses Top Three Selection Minimal Races",
+		"description": "You have 25 horses and a track that can race up to 5 horses at a time. You do not have a stopwatch. You want to find the top 3 fastest horses among the 25. What is the minimum number of races required?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "7 races. Divide into 5 groups of 5 and race them all (5 races). Take the winners of these 5 races and race them against each other (Race 6). The winner of Race 6 is the absolute fastest. Now, you only need to determine 2nd and 3rd place. Take the 2nd and 3rd place horses from the group of the absolute winner, the 1st and 2nd place horses from the group of the second-fastest horse in Race 6, and the 1st place horse from the group of the third-fastest horse in Race 6. Race these 5 horses (Race 7) to find the 2nd and 3rd fastest overall.",
+		"hints": [
+			"Hint 1 (Understanding): Start by racing all the horses in 5 distinct groups of 5. Now you know the relative order within those groups.",
+			"Hint 2 (Approach): Race the 5 winners against each other in a 6th race. The winner of this race is the absolute fastest horse. But you still need 2nd and 3rd place.",
+			"Hint 3 (Partial Logic): The 2nd and 3rd place horses overall could have been in the absolute winner's initial group. Do you need to consider the 4th and 5th place horses from any group at all?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e8e",
+		"title": "The Train Tunnel Collision Timing Avoidance",
+		"description": "Two trains are on the same track, 100 miles apart, heading towards each other. Train A is traveling at 50 mph. Train B is traveling at 50 mph. A super-fast bird starts at the front of Train A, flies to Train B at 100 mph, turns around instantly, and flies back to Train A, repeating this until the trains crash. What is the total distance the bird flies?",
+		"difficulty": "Medium",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "100 miles. Don't calculate the infinite back-and-forth series. Calculate the time. The trains are 100 miles apart and closing the gap at a combined speed of 100 mph (50 + 50). Therefore, they will crash in exactly 1 hour. The bird flies at a constant speed of 100 mph. Since it flies for exactly 1 hour, it travels exactly 100 miles.",
+		"hints": [
+			"Hint 1 (Understanding): Do not try to calculate the distance of every single zig-zag back and forth the bird makes. That is an infinite series and a math trap.",
+			"Hint 2 (Approach): Remember that Distance = Speed * Time. You already know the bird's speed is 100 mph. If you can figure out exactly how long the bird is flying, you can find the distance.",
+			"Hint 3 (Partial Logic): Focus solely on the trains. They are 100 miles apart, heading towards each other at a combined closure speed of 100 mph. Exactly how long until they crash?"
+		],
+		"isActive": true,
+		"__v": 0
+	},
+	{
+		"_id": "6a003024a92f2660baba2e9d",
+		"title": "The Pirate's Moving Landmark Treasure Geometry",
+		"description": "A pirate buried treasure on an island with a gallows, an oak tree, and a pine tree. He walked from the gallows to the oak, turned 90 degrees right, walked the exact same distance, and placed a peg. He went back to the gallows, walked to the pine, turned 90 degrees left, walked the same distance, and placed a second peg. The treasure is exactly halfway between the pegs. Years later, the gallows is gone. How does he find the treasure?",
+		"difficulty": "Hard",
+		"category": "Analytical Reasoning",
+		"referenceSolution": "The location of the treasure is completely independent of where the gallows was. Using complex numbers or geometry, you can prove that regardless of where the starting point (gallows) is, the midpoint between the two pegs will always form an exact isosceles right triangle with the two trees. He just needs to draw a line between the oak and pine, find the midpoint, turn 90 degrees, and walk half the distance of the tree-line.",
+		"hints": [
+			"Hint 1 (Understanding): Don't try to guess where the gallows was. Try drawing this on paper, and place the gallows in a random spot. Then try another random spot. What do you notice about the treasure's location?",
+			"Hint 2 (Approach): The treasure's location is a mathematical constant relative to the two trees. The position of the gallows cancels out entirely in the geometry.",
+			"Hint 3 (Partial Logic): Draw a line connecting the Oak and the Pine. Find the exact midpoint of that line. The treasure will form an isosceles right triangle with the two trees."
+		],
+		"isActive": true,
+		"__v": 0
+	}
+]

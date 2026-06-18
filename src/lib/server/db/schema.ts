@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, pgEnum, pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
 	id: uuid().primaryKey().defaultRandom(),
@@ -51,3 +51,21 @@ export const passwordResetTokens = pgTable('password_reset_tokens', {
 
 export type newPasswordResetToken = typeof passwordResetTokens.$inferInsert;
 export type passwordResetToken = typeof passwordResetTokens.$inferSelect;
+
+export const difficultyEnum = pgEnum('difficulty_enum', ['easy', 'medium', 'hard']);
+
+export const problems = pgTable('problems', {
+	id: uuid().primaryKey().defaultRandom(),
+	title: varchar({ length: 255 }).notNull(),
+	description: text().notNull(),
+	difficulty: difficultyEnum().notNull(),
+	category: varchar({ length: 255 }).notNull(),
+	referenceSolution: text().notNull(),
+	hints: text().array().notNull(),
+	isActive: boolean().default(true),
+	createdAt: timestamp().defaultNow()
+});
+
+export type newProblem = typeof problems.$inferInsert;
+export type problem = typeof problems.$inferSelect;
+export type difficultyLevel = (typeof difficultyEnum.enumValues)[number];
