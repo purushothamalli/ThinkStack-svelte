@@ -16,14 +16,14 @@
 		<Card.Header>
 			<Card.Title
 				class="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white to-stone-500"
-				>Sign in to your Account</Card.Title
+				>Change Password</Card.Title
 			>
 		</Card.Header>
 		<Card.Content class="w-full max-w-md">
 			<div class="space-y-4">
 				<form
 					method="POST"
-					action="?/login"
+					action="/profile?/changePassword"
 					use:enhance={() => {
 						loading = true;
 						return async ({ update }) => {
@@ -35,47 +35,39 @@
 				>
 					<div class="space-y-2">
 						<div class="space-y-2">
-							<Label class="text-md tracking-widest font-extrabold text-stone-400" for="email"
-								>Enter Email:</Label
+							<Label
+								class="text-md tracking-widest font-extrabold text-stone-400"
+								for="currentPassword">Enter Current Password:</Label
 							>
 							<Input
 								class="bg-stone-950/50 text-white border-stone-700 h-14 text-lg focus:ring-1 focus:ring-stone-500 transition-all border-3"
-								id="email"
-								name="email"
-								placeholder="Email"
-								type="email"
+								id="currentPassword"
+								name="currentPassword"
+								placeholder="Current Password"
+								type="password"
 								required
 							/>
-							{#if form?.errors?.email}
+							{#if form?.errors?.currentPassword}
 								<p class="text-[10px] uppercase font-bold text-red-500 tracking-wider">
-									{form.errors.email[0]}
+									{form.errors.currentPassword[0]}
 								</p>
 							{/if}
 						</div>
 						<div class="space-y-2">
-							<Label class="text-md tracking-widest font-extrabold text-stone-400" for="password"
-								>Enter Password:</Label
+							<Label class="text-md tracking-widest font-extrabold text-stone-400" for="newPassword"
+								>Enter new Password:</Label
 							>
 							<Input
 								class="bg-stone-950/50 text-white border-stone-700 h-14 text-lg focus:ring-1 focus:ring-stone-500 transition-all border-3"
-								id="password"
-								name="password"
-								placeholder="Password"
+								id="newPassword"
+								name="newPassword"
+								placeholder="New Password"
 								type="password"
 								required
 							/>
-							<div class="my-4 justify-between items-center text-stone-500 text-md tracking-tight">
-								<a
-									href="/forgot-password"
-									data-sveltekit-preload-data
-									class="text-white font-medium underline underline-offset-4 decoration-stone-700 hover:decoration-white transition-all duration-300"
-								>
-									Forgot Password ?
-								</a>
-							</div>
-							{#if form?.errors?.password}
+							{#if form?.errors?.newPassword}
 								<p class="text-[10px] uppercase font-bold text-red-500 tracking-wider">
-									{form.errors.password[0]}
+									{form.errors.newPassword[0]}
 								</p>
 							{/if}
 						</div>
@@ -84,20 +76,10 @@
 							class="w-full h-13 text-lg font-bold bg-white text-black hover:bg-stone-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all
    hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
 						>
-							{loading ? 'Logging in...' : 'Login'}
+							{loading ? 'Changing your Password...' : 'Change Password'}
 						</Button>
 					</div>
 				</form>
-				<p class="mt-8 text-center text-stone-500 font-medium tracking-tight">
-					Don't have an account?
-					<a
-						href={'/register'}
-						data-sveltekit-preload-data
-						class="text-white font-bold underline underline-offset-4 decoration-stone-700 hover:decoration-white transition-all duration-300"
-					>
-						Register here
-					</a>
-				</p>
 				{#if form?.message}
 					<div
 						class="flex items-center gap-3 p-4 rounded-xl border border-red-900/50 bg-red-500/10 backdrop-blur-md animate-in fade-in slide-in-from-top-2

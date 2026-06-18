@@ -16,14 +16,14 @@
 		<Card.Header>
 			<Card.Title
 				class="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-linear-to-b from-white to-stone-500"
-				>Sign in to your Account</Card.Title
+				>Forgot Password ?</Card.Title
 			>
 		</Card.Header>
 		<Card.Content class="w-full max-w-md">
 			<div class="space-y-4">
 				<form
 					method="POST"
-					action="?/login"
+					action="?/forgotPassword"
 					use:enhance={() => {
 						loading = true;
 						return async ({ update }) => {
@@ -52,52 +52,15 @@
 								</p>
 							{/if}
 						</div>
-						<div class="space-y-2">
-							<Label class="text-md tracking-widest font-extrabold text-stone-400" for="password"
-								>Enter Password:</Label
-							>
-							<Input
-								class="bg-stone-950/50 text-white border-stone-700 h-14 text-lg focus:ring-1 focus:ring-stone-500 transition-all border-3"
-								id="password"
-								name="password"
-								placeholder="Password"
-								type="password"
-								required
-							/>
-							<div class="my-4 justify-between items-center text-stone-500 text-md tracking-tight">
-								<a
-									href="/forgot-password"
-									data-sveltekit-preload-data
-									class="text-white font-medium underline underline-offset-4 decoration-stone-700 hover:decoration-white transition-all duration-300"
-								>
-									Forgot Password ?
-								</a>
-							</div>
-							{#if form?.errors?.password}
-								<p class="text-[10px] uppercase font-bold text-red-500 tracking-wider">
-									{form.errors.password[0]}
-								</p>
-							{/if}
-						</div>
 						<Button
 							type="submit"
 							class="w-full h-13 text-lg font-bold bg-white text-black hover:bg-stone-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all
    hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
 						>
-							{loading ? 'Logging in...' : 'Login'}
+							{loading ? 'Getting your new Password...' : 'Get new Password'}
 						</Button>
 					</div>
 				</form>
-				<p class="mt-8 text-center text-stone-500 font-medium tracking-tight">
-					Don't have an account?
-					<a
-						href={'/register'}
-						data-sveltekit-preload-data
-						class="text-white font-bold underline underline-offset-4 decoration-stone-700 hover:decoration-white transition-all duration-300"
-					>
-						Register here
-					</a>
-				</p>
 				{#if form?.message}
 					<div
 						class="flex items-center gap-3 p-4 rounded-xl border border-red-900/50 bg-red-500/10 backdrop-blur-md animate-in fade-in slide-in-from-top-2

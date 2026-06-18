@@ -65,8 +65,9 @@
 				</a>
 				<Button
 					href="/register"
-					class="flex items-center gap-2 bg-white text-black font-medium h-10 px-6 rounded-full transition-all duration-300
-   hover:bg-stone-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+					variant="secondary"
+					class="flex items-center gap-2 bg-white text-black font-medium h-10 px-6 rounded-full hover:bg-stone-200 hover:border-black hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300
+   "
 				>
 					<UserPlus size={18} />
 					<span>Get Started</span>

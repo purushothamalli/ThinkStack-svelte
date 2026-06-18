@@ -5,6 +5,8 @@ import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '$env/static/private';
 import { sessionRepository } from '../repositories/session.repository';
 import crypto from 'crypto';
 import type { user } from '../db/schema';
+import { emailService } from './email.service';
+import { passwordResetTokenRepository } from '../repositories/passwordResetToken.repository';
 
 type Tokens = { accessToken: string; refreshToken: string };
 type userWithTokens = {
@@ -92,6 +94,47 @@ export const authService = {
 			accessToken,
 			refreshToken
 		};
+	},
+	forgotPassword: async (email: string): Promise<{ Success: boolean }> => {
+		const user = await userRepository.findByEmail(email);
+		if (!user) throw new Error('Email is not registered!');
+		const token = crypto
+			.createHash('sha256')
+			.update(crypto.randomBytes(32).toString('hex'))
+			.digest('hex');
+		const tokenHash = hashToken(token);
+		const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
+		await passwordResetTokenRepository.createPasswordResetToken({
+			userId: user.id,
+			tokenHash,
+			expiresAt
+		});
+		emailService.sendResetEmail(email, token);
+		return { Success: true };
+	},
+	resetPassword: async (plainToken: string, newPassword: string): Promise<{ Success: boolean }> => {
+		const hashedToken = hashToken(plainToken);
+		const match = await passwordResetTokenRepository.findActiveByHash(hashedToken);
+		if (!match) throw new Error('Invalid or expired Token!');
+		const passwordHash = await hashPassword(newPassword);
+		await userRepository.updatePassword(match.userId, passwordHash);
+		await passwordResetTokenRepository.deletePasswordToken(match.id);
+		await authService.logoutAllDevices(match.userId);
+		return { Success: true };
+	},
+	changePassword: async (
+		userId: string,
+		currentPassword: string,
+		newPassword: string
+	): Promise<{ Success: boolean }> => {
+		const user = await userRepository.findById(userId);
+		if (!user) throw new Error("User doesn't exist!");
+		const match = await bcrypt.compare(currentPassword, user.passwordHash);
+		if (!match) throw new Error('Invalid credentials!');
+		const newPasswordHash = await hashPassword(newPassword);
+		await userRepository.updatePassword(user.id, newPasswordHash);
+		await authService.logoutAllDevices(user.id);
+		return { Success: true };
 	},
 	refresh: async (oldRefreshToken: string, userAgent: string): Promise<Tokens> => {
 		const { payload } = await jwtVerify(oldRefreshToken, refreshTokenSecret);
