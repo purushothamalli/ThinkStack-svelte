@@ -1,7 +1,19 @@
 import { authService } from '$lib/server/services/auth.service';
 import { deleteCookies } from '$lib/server/utils/cookies';
-import { fail, redirect, type Actions, type Cookies } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import z from 'zod';
+import type { PageServerLoad, Actions } from './$types';
+import { passwordResetTokenRepository } from '$lib/server/repositories/passwordResetToken.repository';
+import crypto from 'crypto';
+
+export const load: PageServerLoad = async ({ locals, params }) => {
+	if (locals.user) {
+		throw redirect(307, '/home');
+	}
+	const hashedToken = crypto.createHash('sha256').update(params.token).digest('hex');
+	const match = await passwordResetTokenRepository.findActiveByHash(hashedToken);
+	if (!match) throw redirect(307, '/login');
+};
 
 const resetPasswordSchema = z
 	.object({
@@ -14,15 +26,7 @@ const resetPasswordSchema = z
 	});
 
 export const actions: Actions = {
-	resetPassword: async ({
-		request,
-		params,
-		cookies
-	}: {
-		request: Request;
-		params: Record<string, string>;
-		cookies: Cookies;
-	}) => {
+	default: async ({ request, params, cookies }) => {
 		let res;
 		try {
 			const data = await request.formData();
@@ -38,7 +42,7 @@ export const actions: Actions = {
 			return fail(400, { message: (error as Error).message });
 		}
 		if (res.Success) {
-			return redirect(303, '/login');
+			throw redirect(303, '/login');
 		} else return { message: 'Password Reset failed!' };
 	}
 };

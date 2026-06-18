@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	let { form } = $props();
+	import type { ActionData } from './$types';
+	let { form }: { form: ActionData } = $props();
 	let loading = $state(false);
 </script>
 
@@ -23,7 +24,6 @@
 			<div class="space-y-4">
 				<form
 					method="POST"
-					action="?/forgotPassword"
 					use:enhance={() => {
 						loading = true;
 						return async ({ update }) => {
@@ -63,28 +63,54 @@
 				</form>
 				{#if form?.message}
 					<div
-						class="flex items-center gap-3 p-4 rounded-xl border border-red-900/50 bg-red-500/10 backdrop-blur-md animate-in fade-in slide-in-from-top-2
-   duration-300"
+						class="flex items-center gap-3 p-4 rounded-xl border backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-300
+            {form.success
+							? 'border-emerald-900/50 bg-emerald-500/10'
+							: 'border-red-900/50 bg-red-500/10'}"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							class="text-red-500"
-							><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line
-								x1="12"
-								y1="16"
-								x2="12.01"
-								y2="16"
-							/></svg
+						{#if form.success}
+							<!-- Emerald Check Circle Icon -->
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="text-emerald-500"
+							>
+								<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+								<polyline points="22 4 12 14.01 9 11.01" />
+							</svg>
+						{:else}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="text-red-500"
+							>
+								<circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line
+									x1="12"
+									y1="16"
+									x2="12.01"
+									y2="16"
+								/>
+							</svg>
+						{/if}
+						<p
+							class="text-sm font-bold tracking-tight {form.success
+								? 'text-emerald-50'
+								: 'text-red-50'}"
 						>
-						<p class="text-sm font-bold tracking-tight text-red-50">
 							{form.message}
 						</p>
 					</div>

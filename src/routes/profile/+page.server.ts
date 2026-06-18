@@ -1,11 +1,11 @@
-import { redirect, fail, type Actions, type Cookies } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import { redirect, fail } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from './$types';
 import z from 'zod';
 import { authService } from '$lib/server/services/auth.service';
 import { deleteCookies } from '$lib/server/utils/cookies';
 
-export const load: PageServerLoad = ({ locals }: { locals: App.Locals }) => {
-	if (!locals.user) redirect(307, '/login');
+export const load: PageServerLoad = ({ locals }) => {
+	if (!locals.user) throw redirect(307, '/login');
 };
 
 const changePasswordSchema = z.object({
@@ -14,15 +14,7 @@ const changePasswordSchema = z.object({
 });
 
 export const actions: Actions = {
-	changePassword: async ({
-		request,
-		locals,
-		cookies
-	}: {
-		request: Request;
-		locals: App.Locals;
-		cookies: Cookies;
-	}) => {
+	default: async ({ request, locals, cookies }) => {
 		let res;
 		try {
 			const data = await request.formData();

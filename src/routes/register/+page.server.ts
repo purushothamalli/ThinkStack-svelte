@@ -1,17 +1,24 @@
 import { authService } from '$lib/server/services/auth.service';
 import { setCookies } from '$lib/server/utils/cookies';
-import { fail, redirect, type Actions, type Cookies } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import z from 'zod';
+import type { PageServerLoad, Actions } from './$types';
+
+export const load: PageServerLoad = ({ locals }) => {
+	if (locals.user) {
+		throw redirect(307, '/home');
+	}
+};
 
 const registerSchema = z.object({
 	firstname: z.string().min(4, 'First name must be atleast 4 characters!').trim(),
 	lastname: z.string().min(4, 'First name must be atleast 4 characters!').trim(),
-	email: z.email('Invalid email!'),
+	email: z.email({ error: 'Invalid email!' }),
 	password: z.string().min(4, 'Password must be more than 4 chars')
 });
 
 export const actions: Actions = {
-	register: async ({ cookies, request }: { cookies: Cookies; request: Request }) => {
+	default: async ({ cookies, request }) => {
 		let success = false;
 		try {
 			const data = await request.formData();
@@ -31,6 +38,6 @@ export const actions: Actions = {
 			}
 			return fail(400, { message: (error as Error).message });
 		}
-		if (success) return redirect(303, '/home');
+		if (success) throw redirect(303, '/home');
 	}
 };

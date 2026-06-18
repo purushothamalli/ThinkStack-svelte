@@ -1,7 +1,14 @@
 import { authService } from '$lib/server/services/auth.service';
 import { setCookies } from '$lib/server/utils/cookies';
-import { fail, redirect, type Actions, type Cookies } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import z from 'zod';
+import type { PageServerLoad, Actions } from './$types';
+
+export const load: PageServerLoad = ({ locals }) => {
+	if (locals.user) {
+		throw redirect(307, '/home');
+	}
+};
 
 const loginSchema = z.object({
 	email: z.email('Invalid email!'),
@@ -9,7 +16,7 @@ const loginSchema = z.object({
 });
 
 export const actions: Actions = {
-	login: async ({ cookies, request }: { cookies: Cookies; request: Request }) => {
+	default: async ({ cookies, request }) => {
 		let success = false;
 		try {
 			const data = await request.formData();
@@ -27,6 +34,7 @@ export const actions: Actions = {
 			}
 			return fail(400, { message: (error as Error).message });
 		}
-		if (success) return redirect(303, '/home');
+		if (success) throw redirect(303, '/home');
 	}
 };
+

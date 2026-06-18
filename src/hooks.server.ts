@@ -3,7 +3,7 @@ import { jwtVerify } from 'jose';
 import { ACCESS_TOKEN_SECRET } from '$env/static/private';
 import { userRepository } from '$lib/server/repositories/user.repository';
 import { authService } from '$lib/server/services/auth.service';
-import { setCookies } from '$lib/server/utils/cookies';
+import { deleteCookies, setCookies } from '$lib/server/utils/cookies';
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const accessToken = event.cookies.get('accessToken');
@@ -38,6 +38,7 @@ export const handle: Handle = async ({ resolve, event }) => {
 		}
 	} catch (error) {
 		console.error('Hook error:', error);
+		deleteCookies(event.cookies);
 	}
 	return resolve(event);
 };

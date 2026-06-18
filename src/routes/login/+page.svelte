@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	let { form } = $props();
+	import type { ActionData } from './$types';
+	let { form }: { form: ActionData } = $props();
 	let loading = $state(false);
 </script>
 
@@ -23,7 +24,6 @@
 			<div class="space-y-4">
 				<form
 					method="POST"
-					action="?/login"
 					use:enhance={() => {
 						loading = true;
 						return async ({ update }) => {
@@ -64,7 +64,9 @@
 								type="password"
 								required
 							/>
-							<div class="my-4 justify-between items-center text-stone-500 text-md tracking-tight">
+							<div
+								class="flex my-4 justify-between items-center text-stone-500 text-md tracking-tight"
+							>
 								<a
 									href="/forgot-password"
 									data-sveltekit-preload-data

@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { ActionData } from '../../routes/profile/$types';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	let { form } = $props();
+	let { form }: { form: ActionData } = $props();
 	let loading = $state(false);
 </script>
 
@@ -23,7 +24,7 @@
 			<div class="space-y-4">
 				<form
 					method="POST"
-					action="/profile?/changePassword"
+					action="/profile"
 					use:enhance={() => {
 						loading = true;
 						return async ({ update }) => {

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import ChangePassword from '$lib/components/ChangePassword.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { KeyRound } from '@lucide/svelte';
