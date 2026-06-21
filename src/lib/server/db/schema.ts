@@ -1,5 +1,14 @@
 import { relations } from 'drizzle-orm';
-import { boolean, pgEnum, pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import {
+	boolean,
+	integer,
+	pgEnum,
+	pgTable,
+	text,
+	timestamp,
+	uuid,
+	varchar
+} from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
 	id: uuid().primaryKey().defaultRandom(),
@@ -69,3 +78,25 @@ export const problems = pgTable('problems', {
 export type newProblem = typeof problems.$inferInsert;
 export type problem = typeof problems.$inferSelect;
 export type difficultyLevel = (typeof difficultyEnum.enumValues)[number];
+
+export const drafts = pgTable('drafts', {
+	id: uuid().primaryKey().defaultRandom(),
+	userId: uuid()
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+	problemId: uuid()
+		.notNull()
+		.references(() => problems.id, { onDelete: 'cascade' }),
+	currentStep: varchar({ length: 255 }).notNull(),
+	understanding: text().notNull().default(''),
+	breakdown: text().notNull().default(''),
+	approach: text().notNull().default(''),
+	solution: text().notNull().default(''),
+	reflection: text().notNull().default(''),
+	hintsUsed: integer().notNull().default(0),
+	createdAt: timestamp().notNull().defaultNow(),
+	updatedAt: timestamp().notNull().defaultNow()
+});
+
+export type newDraft = typeof drafts.$inferInsert;
+export type draft = typeof drafts.$inferSelect;
