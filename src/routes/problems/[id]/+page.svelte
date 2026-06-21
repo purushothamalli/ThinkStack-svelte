@@ -10,7 +10,7 @@
 	const problem = $derived(data.problem);
 	const steps = ['understanding', 'breakdown', 'approach', 'solution', 'reflection'];
 
-	let draft = $state(untrack(() => data.draft));
+	let draft = $derived(data.draft);
 	let activeStep = $state(untrack(() => data.draft?.currentStep || 'understanding'));
 	let storageAreaKey = $derived(`problem-${problem.id}-${activeStep}`);
 
@@ -19,10 +19,6 @@
 	let errorMessage = $state<string | null>(null);
 
 	// Sync draft reactive state if parent data updates (e.g., on loader re-run)
-	$effect(() => {
-		draft = data.draft;
-	});
-
 	$effect(() => {
 		const cached = localStorage.getItem(storageAreaKey);
 		if (cached !== null) {

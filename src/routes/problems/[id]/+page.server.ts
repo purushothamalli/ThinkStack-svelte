@@ -3,6 +3,7 @@ import type { PageServerLoad, Actions } from './$types';
 import { problemService } from '$lib/server/services/problem.service';
 import { draftService } from '$lib/server/services/draft.service';
 import z from 'zod';
+import { submissionService } from '$lib/server/services/submission.service';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	if (!locals.user) throw redirect(307, '/login');
@@ -42,6 +43,9 @@ export const actions: Actions = {
 				parsed.content,
 				parsed.isHintUsed
 			);
+			if (parsed.activeStep === 'reflection') {
+				await submissionService.submitSolution(locals.user.id, parsed.problemId);
+			}
 			return { success: true };
 		} catch (error) {
 			if (error instanceof z.ZodError) {

@@ -100,3 +100,78 @@ export const drafts = pgTable('drafts', {
 
 export type newDraft = typeof drafts.$inferInsert;
 export type draft = typeof drafts.$inferSelect;
+
+export const submissions = pgTable('submissions', {
+	id: uuid().primaryKey().defaultRandom(),
+	userId: uuid()
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+	problemId: uuid()
+		.notNull()
+		.references(() => problems.id, { onDelete: 'cascade' }),
+	hintsUsed: integer().notNull().default(0),
+	penaltyApplied: integer().notNull().default(0),
+	finalScore: integer().notNull().default(0),
+	mistakeTags: text().array().notNull().default([]),
+	thinkingPatterns: text().array().notNull().default([]),
+	createdAt: timestamp().notNull().defaultNow()
+});
+
+export const stepScores = pgTable('step_scores', {
+	id: uuid().primaryKey().defaultRandom(),
+	submissionId: uuid()
+		.notNull()
+		.references(() => submissions.id, { onDelete: 'cascade' }),
+	understanding: text().notNull().default(''),
+	understandingScore: integer().notNull().default(0),
+	breakdown: text().notNull().default(''),
+	breakdownScore: integer().notNull().default(0),
+	approach: text().notNull().default(''),
+	approachScore: integer().notNull().default(0),
+	solution: text().notNull().default(''),
+	solutionScore: integer().notNull().default(0),
+	reflection: text().notNull().default(''),
+	reflectionScore: integer().notNull().default(0)
+});
+
+export const expertComparisons = pgTable('expert_comparisons', {
+	id: uuid().primaryKey().defaultRandom(),
+	submissionId: uuid()
+		.notNull()
+		.references(() => submissions.id, { onDelete: 'cascade' }),
+	expertUnderstanding: text().notNull().default(''),
+	expertReasoningFlow: text().notNull().default(''),
+	strengths: text().notNull().default(''),
+	weaknesses: text().notNull().default(''),
+	howToImprove: text().notNull().default('')
+});
+
+export type submission = typeof submissions.$inferSelect;
+export type stepScore = typeof stepScores.$inferSelect;
+export type expertComparison = typeof expertComparisons.$inferSelect;
+
+export const submissionRelations = relations(submissions, ({ one }) => ({
+	user: one(users, {
+		fields: [submissions.userId],
+		references: [users.id]
+	}),
+	problem: one(problems, {
+		fields: [submissions.problemId],
+		references: [problems.id]
+	}),
+	stepScores: one(stepScores),
+	expertComparisons: one(expertComparisons)
+}));
+
+export const stepScoresRelations = relations(stepScores, ({ one }) => ({
+	submission: one(submissions, {
+		fields: [stepScores.submissionId],
+		references: [submissions.id]
+	})
+}));
+export const expertComparisonsRelations = relations(expertComparisons, ({ one }) => ({
+	submission: one(submissions, {
+		fields: [expertComparisons.submissionId],
+		references: [submissions.id]
+	})
+}));
