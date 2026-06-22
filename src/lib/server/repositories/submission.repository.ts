@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm';
+import { and, avg, count, eq, sum } from 'drizzle-orm';
 import { db } from '../db';
 import {
 	drafts,
@@ -38,6 +38,57 @@ export const submissionRepository = {
 			with: {
 				stepScores: true,
 				expertComparisons: true
+			}
+		});
+	},
+	getUserStats: async (
+		userId: string
+	): Promise<{
+		totalSolved: number;
+		averageScore: string | null;
+		totalHintsUsed: string | null;
+	}> => {
+		return (
+			await db
+				.select({
+					totalSolved: count(),
+					averageScore: avg(submissions.finalScore),
+					totalHintsUsed: sum(submissions.hintsUsed)
+				})
+				.from(submissions)
+				.where(eq(submissions.userId, userId))
+				.groupBy(submissions.userId)
+		)[0];
+	},
+	getUserSubmissions: async (
+		userId: string
+	): Promise<
+		{
+			id: string;
+			createdAt: Date;
+			userId: string;
+			problemId: string;
+			hintsUsed: number;
+			penaltyApplied: number;
+			finalScore: number;
+			mistakeTags: string[];
+			thinkingPatterns: string[];
+			problem: {
+				title: string;
+				difficulty: 'easy' | 'medium' | 'hard';
+			};
+		}[]
+	> => {
+		return await db.query.submissions.findMany({
+			where: (submissions, { eq }) => eq(submissions.userId, userId),
+			orderBy: (submissions, { desc }) => desc(submissions.createdAt),
+			with: {
+				problem: {
+					columns: {
+						title: true,
+						difficulty: true
+					}
+				}
 			}
 		});
 	}

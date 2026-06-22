@@ -8,7 +8,7 @@
 	const steps = ['understanding', 'breakdown', 'approach', 'solution', 'reflection'] as const;
 	type Step = (typeof steps)[number];
 
-	let activeCompareTab = $state('understanding');
+	let activeCompareTab = $state<Step>('understanding');
 
 	const getStepScore = (step: Step) => {
 		if (!submission?.stepScores) return 0;

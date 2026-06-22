@@ -57,5 +57,18 @@ export const submissionService = {
 	},
 	getLatestSubmission: async (userId: string, problemId: string) => {
 		return await submissionRepository.getSubmission(userId, problemId);
+	},
+	getUserDashboardData: async (userId: string) => {
+		const data = await Promise.all([
+			submissionRepository.getUserStats(userId),
+			submissionRepository.getUserSubmissions(userId)
+		]);
+		const rawStats = data[0];
+		const stats = {
+			totalSolved: rawStats?.totalSolved ?? 0,
+			averageScore: rawStats?.averageScore ? parseFloat(rawStats.averageScore).toFixed(1) : '0',
+			totalHintsUsed: rawStats?.totalHintsUsed ? parseInt(rawStats.totalHintsUsed, 10) : 0
+		};
+		return { stats, submissions: data[1] };
 	}
 };

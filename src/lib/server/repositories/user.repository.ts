@@ -38,5 +38,33 @@ export const userRepository = {
 					createdAt: users.createdAt
 				})
 		)[0];
+	},
+	updateProfile: async (
+		userId: string,
+		firstName: string,
+		lastName: string
+	): Promise<userWithoutPassword> => {
+		return (
+			await db.update(users).set({ firstName, lastName }).where(eq(users.id, userId)).returning({
+				id: users.id,
+				firstName: users.firstName,
+				lastName: users.lastName,
+				email: users.email,
+				profilePic: users.profilePic,
+				createdAt: users.createdAt
+			})
+		)[0];
+	},
+	updateProfilePic: async (userId: string, profilePic: string): Promise<userWithoutPassword> => {
+		return (
+			await db.update(users).set({ profilePic }).where(eq(users.id, userId)).returning({
+				id: users.id,
+				firstName: users.firstName,
+				lastName: users.lastName,
+				email: users.email,
+				profilePic: users.profilePic,
+				createdAt: users.createdAt
+			})
+		)[0];
 	}
 };

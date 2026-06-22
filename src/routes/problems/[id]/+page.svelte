@@ -93,25 +93,8 @@
 				isHintUsed = false;
 				errorMessage = null;
 
-				// Update reactive draft state locally
-				if (!draft) {
-					draft = {
-						id: '',
-						userId: '',
-						problemId: problem.id,
-						currentStep: activeStep,
-						understanding: '',
-						breakdown: '',
-						approach: '',
-						solution: '',
-						reflection: '',
-						hintsUsed: 0,
-						createdAt: new Date(),
-						updatedAt: new Date()
-					};
-				}
-				draft[activeStep as keyof typeof draft] = editorContent;
-				draft.currentStep = activeStep;
+				// Clear the local cache for the step since it's now securely saved on the DB
+				localStorage.removeItem(storageAreaKey);
 
 				if (activeStep === 'reflection') {
 					steps.forEach((step) => {

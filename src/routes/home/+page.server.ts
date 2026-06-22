@@ -2,9 +2,14 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { authService } from '$lib/server/services/auth.service';
 import { deleteCookies } from '$lib/server/utils/cookies';
+import { submissionService } from '$lib/server/services/submission.service.js';
 
-export const load: PageServerLoad = ({ locals }: { locals: App.Locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user) redirect(307, '/login');
+	return {
+		dashboard: await submissionService.getUserDashboardData(locals.user.id),
+		user: locals.user
+	};
 };
 
 export const actions = {

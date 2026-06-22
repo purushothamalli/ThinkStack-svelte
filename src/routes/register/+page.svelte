@@ -5,7 +5,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import type { PageProps } from './$types';
-	let { form }: PageProps = $props();
+	let { form }: { form: any } = $props();
 	let loading = $state(false);
 </script>
 
