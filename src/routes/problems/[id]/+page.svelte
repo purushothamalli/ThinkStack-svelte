@@ -17,6 +17,7 @@
 	// Writable state synced reactively with activeStep changes
 	let editorContent = $state('');
 	let errorMessage = $state<string | null>(null);
+	let isSubmitting = $state(false);
 
 	// Sync draft reactive state if parent data updates (e.g., on loader re-run)
 	$effect(() => {
@@ -87,8 +88,10 @@
 	};
 
 	const handleEnhance = () => {
+		isSubmitting = true;
 		errorMessage = null;
-		return async ({ result }: { result: any }) => {
+		return async ({ result, update }: { result: any; update: any }) => {
+			isSubmitting = false;
 			if (result.type === 'success') {
 				isHintUsed = false;
 				errorMessage = null;
@@ -115,6 +118,7 @@
 			} else {
 				errorMessage = 'An error occurred while saving your draft.';
 			}
+			await update({ reset: false });
 		};
 	};
 </script>
@@ -289,7 +293,8 @@
 					oninput={(e) =>
 						localStorage.setItem(storageAreaKey, (e.target as HTMLTextAreaElement).value)}
 					placeholder="Type your response for this step..."
-					class="w-full flex-1 bg-stone-900/30 text-white border-3 border-stone-850 hover:border-stone-800 focus:border-stone-600 focus:outline-none focus:ring-0 rounded-2xl p-6 text-base leading-relaxed placeholder-stone-600 transition-colors resize-none select-text"
+					disabled={isSubmitting}
+					class="w-full flex-1 bg-stone-900/30 text-white border-3 border-stone-850 hover:border-stone-800 focus:border-stone-600 focus:outline-none focus:ring-0 rounded-2xl p-6 text-base leading-relaxed placeholder-stone-600 transition-colors resize-none select-text disabled:opacity-50 disabled:cursor-not-allowed"
 					required
 				></textarea>
 			</div>
@@ -358,19 +363,29 @@
 							const currentIndex = steps.indexOf(activeStep);
 							if (currentIndex > 0) setActiveStep(steps[currentIndex - 1]);
 						}}
-						disabled={activeStep === 'understanding'}
+						disabled={activeStep === 'understanding' || isSubmitting}
 						class="px-5 py-3 rounded-xl border border-stone-800 text-stone-400 hover:text-white hover:border-stone-600 disabled:opacity-30 disabled:cursor-not-allowed text-sm font-bold tracking-tight transition-all"
 					>
 						Previous Step
 					</button>
 					<button
 						type="submit"
-						class="px-6 py-3 rounded-xl text-sm font-bold tracking-tight transition-all
+						disabled={isSubmitting}
+						class="px-6 py-3 rounded-xl text-sm font-bold tracking-tight transition-all flex items-center gap-2
 						{activeStep === 'reflection'
 							? 'bg-white text-black hover:bg-stone-200'
-							: 'bg-stone-900 text-white border border-stone-800 hover:bg-stone-800'}"
+							: 'bg-stone-900 text-white border border-stone-850 hover:bg-stone-800'}
+						disabled:opacity-50 disabled:cursor-not-allowed"
 					>
-						{activeStep === 'reflection' ? 'Submit Solution' : 'Save & Next'}
+						{#if isSubmitting}
+							<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+							</svg>
+							<span>{activeStep === 'reflection' ? 'Evaluating...' : 'Saving...'}</span>
+						{:else}
+							<span>{activeStep === 'reflection' ? 'Submit Solution' : 'Save & Next'}</span>
+						{/if}
 					</button>
 				</div>
 			</div>

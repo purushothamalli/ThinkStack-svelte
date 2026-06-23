@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { jwtVerify } from 'jose';
 import { ACCESS_TOKEN_SECRET } from '$env/static/private';
-import { userRepository } from '$lib/server/repositories/user.repository';
+import { userRepo } from '$lib/server/repos/user.repo';
 import { authService } from '$lib/server/services/auth.service';
 import { deleteCookies, setCookies } from '$lib/server/utils/cookies';
 
@@ -16,7 +16,7 @@ export const handle: Handle = async ({ resolve, event }) => {
 			const { payload } = await jwtVerify(accessToken, accessTokenSecret);
 			const userId = payload.userId as string;
 			const sessionId = payload.sessionId as string;
-			const foundUser = await userRepository.findById(userId);
+			const foundUser = await userRepo.findById(userId);
 			if (foundUser) {
 				const { passwordHash, ...user } = foundUser;
 				event.locals.user = user;
@@ -29,7 +29,7 @@ export const handle: Handle = async ({ resolve, event }) => {
 			const { payload } = await jwtVerify(tokens.accessToken, accessTokenSecret);
 			const userId = payload.userId as string;
 			const sessionId = payload.sessionId as string;
-			const foundUser = await userRepository.findById(userId);
+			const foundUser = await userRepo.findById(userId);
 			if (foundUser) {
 				const { passwordHash, ...user } = foundUser;
 				event.locals.user = user;

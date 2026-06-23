@@ -1,0 +1,140 @@
+generator client {
+    provider   = "prisma-client-js"
+    engineType = "client"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model User {
+    id                  String               @id @default(uuid()) @db.Uuid
+    firstName           String               @map("first_name")
+    lastName            String               @map("last_name")
+    email               String               @unique
+    passwordHash        String               @map("password_hash")
+    profilePic          String?              @map("profile_pic")
+    createdAt           DateTime             @default(now()) @map("created_at") @db.Timestamp()
+    sessions            Session[]
+    passwordResetTokens PasswordResetToken[]
+    drafts              Draft[]
+    submissions         Submission[]
+
+    @@map("users")
+}
+
+model Session {
+    id               String   @id @default(uuid()) @db.Uuid
+    user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId           String   @map("user_id") @db.Uuid
+    refreshTokenHash String   @map("refresh_token_hash")
+    expiresAt        DateTime @map("expires_at") @db.Timestamp()
+    userAgent        String?  @map("user_agent")
+    createdAt        DateTime @default(now()) @map("created_at") @db.Timestamp()
+
+    @@map("sessions")
+}
+
+model PasswordResetToken {
+    id        String   @id @default(uuid()) @db.Uuid
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String   @map("user_id") @db.Uuid
+    tokenHash String   @map("token_hash")
+    expiresAt DateTime @map("expires_at") @db.Timestamp()
+    createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
+
+    @@map("password_reset_tokens")
+}
+
+enum difficultyEnum {
+    easy
+    medium
+    hard
+
+    @@map("difficulty_enum")
+}
+
+model Problem {
+    id                String         @id @default(uuid()) @db.Uuid
+    title             String
+    description       String
+    difficulty        difficultyEnum
+    category          String
+    referenceSolution String         @map("reference_solution")
+    hints             String[]
+    isActive          Boolean?       @default(true) @map("is_active")
+    createdAt         DateTime       @default(now()) @map("created_at") @db.Timestamp()
+    drafts            Draft[]
+    submissions       Submission[]
+
+    @@map("problems")
+}
+
+model Draft {
+    id            String   @id @default(uuid()) @db.Uuid
+    user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId        String   @map("user_id") @db.Uuid
+    problem       Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+    problemId     String   @map("problem_id") @db.Uuid
+    currentStep   String   @map("current_step")
+    understanding String   @default("")
+    breakdown     String   @default("")
+    approach      String   @default("")
+    solution      String   @default("")
+    reflection    String   @default("")
+    hintsUsed     Int      @default(0) @map("hints_used")
+    createdAt     DateTime @default(now()) @map("created_at") @db.Timestamp()
+    updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+    @@unique([userId, problemId])
+    @@map("drafts")
+}
+
+model Submission {
+    id               String            @id @default(uuid()) @db.Uuid
+    user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId           String            @map("user_id") @db.Uuid
+    problem          Problem           @relation(fields: [problemId], references: [id], onDelete: Cascade)
+    problemId        String            @map("problem_id") @db.Uuid
+    hintsUsed        Int               @default(0) @map("hints_used")
+    penaltyApplied   Int               @default(0) @map("penalty_applied")
+    finalScore       Int               @default(0) @map("final_score")
+    mistakeTags      String[]          @default([]) @map("mistake_tags")
+    thinkingPatterns String[]          @default([]) @map("thinking_patterns")
+    createdAt        DateTime          @default(now()) @map("created_at") @db.Timestamp()
+    stepScores       StepScore?
+    expertComparisons ExpertComparison?
+
+    @@map("submissions")
+}
+
+model StepScore {
+    id                 String     @id @default(uuid()) @db.Uuid
+    submission         Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+    submissionId       String     @unique @map("submission_id") @db.Uuid
+    understanding      String     @default("")
+    understandingScore Int        @default(0) @map("understanding_score")
+    breakdown          String     @default("")
+    breakdownScore     Int        @default(0) @map("breakdown_score")
+    approach           String     @default("")
+    approachScore      Int        @default(0) @map("approach_score")
+    solution           String     @default("")
+    solutionScore      Int        @default(0) @map("solution_score")
+    reflection         String     @default("")
+    reflectionScore    Int        @default(0) @map("reflection_score")
+
+    @@map("step_scores")
+}
+
+model ExpertComparison {
+    id                  String     @id @default(uuid()) @db.Uuid
+    submission          Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+    submissionId        String     @unique @map("submission_id") @db.Uuid
+    expertUnderstanding String     @default("") @map("expert_understanding")
+    expertReasoningFlow String     @default("") @map("expert_reasoning_flow")
+    strengths           String     @default("")
+    weaknesses          String     @default("")
+    howToImprove        String     @default("") @map("how_to_improve")
+
+    @@map("expert_comparisons")
+}

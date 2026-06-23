@@ -3,7 +3,7 @@ import { deleteCookies } from '$lib/server/utils/cookies';
 import { fail, redirect } from '@sveltejs/kit';
 import z from 'zod';
 import type { PageServerLoad, Actions } from './$types';
-import { passwordResetTokenRepository } from '$lib/server/repositories/passwordResetToken.repository';
+import { passwordResetTokenRepo } from '$lib/server/repos/passwordResetToken.repo';
 import crypto from 'crypto';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		throw redirect(307, '/home');
 	}
 	const hashedToken = crypto.createHash('sha256').update(params.token).digest('hex');
-	const match = await passwordResetTokenRepository.findActiveByHash(hashedToken);
+	const match = await passwordResetTokenRepo.findActiveByHash(hashedToken);
 	if (!match) throw redirect(307, '/login');
 };
 

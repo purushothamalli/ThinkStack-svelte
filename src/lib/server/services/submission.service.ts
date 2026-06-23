@@ -1,5 +1,5 @@
 import type { submission } from '../db/schema';
-import { submissionRepository } from '../repositories/submission.repository';
+import { submissionRepo } from '../repos/submission.repo';
 import { AIService } from './AI.service';
 import { draftService } from './draft.service';
 import { problemService } from './problem.service';
@@ -24,7 +24,7 @@ export const submissionService = {
 		const penaltyApplied = HINT_PENALTIES[draft.hintsUsed] ?? 0;
 		const finalScore = Math.max(0, res.aiBaseScore - penaltyApplied);
 
-		return await submissionRepository.saveSubmission(
+		return await submissionRepo.saveSubmission(
 			{
 				userId,
 				problemId,
@@ -56,18 +56,15 @@ export const submissionService = {
 		);
 	},
 	getLatestSubmission: async (userId: string, problemId: string) => {
-		return await submissionRepository.getSubmission(userId, problemId);
+		return await submissionRepo.getSubmission(userId, problemId);
 	},
 	getUserDashboardData: async (userId: string) => {
 		const data = await Promise.all([
-			submissionRepository.getUserStats(userId),
-			submissionRepository.getUserSubmissions(userId)
+			submissionRepo.getUserStats(userId),
+			submissionRepo.getUserSubmissions(userId)
 		]);
-		const rawStats = data[0];
 		const stats = {
-			totalSolved: rawStats?.totalSolved ?? 0,
-			averageScore: rawStats?.averageScore ? parseFloat(rawStats.averageScore).toFixed(1) : '0',
-			totalHintsUsed: rawStats?.totalHintsUsed ? parseInt(rawStats.totalHintsUsed, 10) : 0
+			...data[0]
 		};
 		return { stats, submissions: data[1] };
 	}

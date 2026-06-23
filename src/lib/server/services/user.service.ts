@@ -1,9 +1,9 @@
-import { userRepository } from '../repositories/user.repository';
+import { userRepo } from '../repos/user.repo';
 import { cloudinary } from '../utils/cloudinary';
 
 export const userService = {
 	updateProfile: async (userId: string, firstName: string, lastName: string) => {
-		return await userRepository.updateProfile(userId, firstName, lastName);
+		return await userRepo.updateProfile(userId, firstName, lastName);
 	},
 	updateProfilePic: async (userId: string, file: Blob) => {
 		const fil = await file.arrayBuffer();
@@ -15,6 +15,6 @@ export const userService = {
 			overwrite: true,
 			invalidate: true
 		});
-		await userRepository.updateProfilePic(userId, res.secure_url);
+		await userRepo.updateProfilePic(userId, res.secure_url);
 	}
 };

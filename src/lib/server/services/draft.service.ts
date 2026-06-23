@@ -1,9 +1,9 @@
 import type { draft, newDraft } from '../db/schema';
-import { draftRepository } from '../repositories/draft.repository';
+import { draftRepo } from '../repos/draft.repo';
 
 export const draftService = {
-	getDraft: async (userId: string, problemId: string): Promise<draft> => {
-		return await draftRepository.getDraft(userId, problemId);
+	getDraft: async (userId: string, problemId: string): Promise<draft | null> => {
+		return await draftRepo.getDraft(userId, problemId);
 	},
 	saveDraft: async (
 		userId: string,
@@ -12,7 +12,7 @@ export const draftService = {
 		content: string,
 		isHintUsed: boolean
 	): Promise<newDraft> => {
-		return await draftRepository.saveDraft(
+		return await draftRepo.saveDraft(
 			userId,
 			problemId,
 			stepName,

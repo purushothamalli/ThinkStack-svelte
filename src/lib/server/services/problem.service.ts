@@ -1,11 +1,11 @@
 import type { difficultyLevel } from '../db/schema';
-import { problemRepository, type selectProblems } from '../repositories/problem.repository';
+import { problemRepo, type selectProblems } from '../repos/problem.repo';
 
 export const problemService = {
 	getproblems: async (difficulty?: difficultyLevel): selectProblems => {
-		return await problemRepository.findAll(difficulty);
+		return await problemRepo.findAll(difficulty);
 	},
 	getProblem: async (problemId: string) => {
-		return await problemRepository.findById(problemId);
+		return await problemRepo.findById(problemId);
 	}
 };

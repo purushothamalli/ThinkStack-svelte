@@ -3,7 +3,20 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const submission = $derived(data.submission);
+	let resolvedSubmission = $state<any>(undefined);
+	let isLoading = $state(true);
+
+	$effect(() => {
+		isLoading = true;
+		Promise.resolve(data.submission).then((val) => {
+			resolvedSubmission = val;
+			isLoading = false;
+		}).catch(() => {
+			isLoading = false;
+		});
+	});
+
+	const submission = $derived(resolvedSubmission);
 	const problem = $derived(data.problem);
 	const steps = ['understanding', 'breakdown', 'approach', 'solution', 'reflection'] as const;
 	type Step = (typeof steps)[number];
@@ -49,52 +62,39 @@
 </script>
 
 <div class="min-h-screen bg-stone-950 text-stone-200 p-6 md:p-12 selection:bg-stone-500/30">
-	{#if !submission}
-		<div class="max-w-4xl mx-auto text-center py-20">
-			<h2 class="text-2xl font-black text-white">No submission found</h2>
-			<p class="text-stone-500 mt-2">
-				Please attempt the problem and submit before viewing results.
-			</p>
-			<a
-				href="/problems"
-				class="inline-block mt-6 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-stone-200 transition-colors"
-			>
-				Go to Library
-			</a>
-		</div>
-	{:else}
-		<div class="max-w-7xl mx-auto space-y-8">
-			<!-- Header -->
-			<div
-				class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-850 pb-6"
-			>
-				<div>
-					<a
-						href="/problems"
-						class="inline-flex items-center gap-2 text-stone-500 hover:text-white transition-colors text-sm font-bold tracking-tight mb-3"
+	<div class="max-w-7xl mx-auto space-y-8">
+		<!-- Header (Renders instantly) -->
+		<div
+			class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-stone-850 pb-6"
+		>
+			<div>
+				<a
+					href="/problems"
+					class="inline-flex items-center gap-2 text-stone-500 hover:text-white transition-colors text-sm font-bold tracking-tight mb-3"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<path d="m15 18-6-6 6-6" />
-						</svg>
-						Back to Library
-					</a>
-					<span class="text-xs font-black tracking-widest uppercase text-stone-500 block">
-						Evaluation Results
-					</span>
-					<h1 class="text-3xl font-black tracking-tight text-white mt-1">
-						{problem?.title || 'Problem Results'}
-					</h1>
-				</div>
+						<path d="m15 18-6-6 6-6" />
+					</svg>
+					Back to Library
+				</a>
+				<span class="text-xs font-black tracking-widest uppercase text-stone-500 block">
+					Evaluation Results
+				</span>
+				<h1 class="text-3xl font-black tracking-tight text-white mt-1">
+					{problem?.title || 'Problem Results'}
+				</h1>
+			</div>
+			{#if submission}
 				<div class="text-right text-xs text-stone-500 font-bold">
 					Submitted on {new Date(submission.createdAt).toLocaleDateString(undefined, {
 						month: 'long',
@@ -102,7 +102,29 @@
 						year: 'numeric'
 					})}
 				</div>
+			{/if}
+		</div>
+
+		<!-- Body loading and contents -->
+		{#if isLoading}
+			<div class="max-w-4xl mx-auto text-center py-20 space-y-6 flex flex-col items-center justify-center">
+				<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+				<p class="text-stone-500 font-bold text-sm tracking-tight">Retrieving your evaluation results...</p>
 			</div>
+		{:else if !submission}
+			<div class="max-w-4xl mx-auto text-center py-20">
+				<h2 class="text-2xl font-black text-white">No submission found</h2>
+				<p class="text-stone-500 mt-2">
+					Please attempt the problem and submit before viewing results.
+				</p>
+				<a
+					href="/problems"
+					class="inline-block mt-6 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-stone-200 transition-colors"
+				>
+					Go to Library
+				</a>
+			</div>
+		{:else}
 
 			<!-- Grid Stats Overview -->
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
