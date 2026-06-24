@@ -7,6 +7,7 @@ import crypto from 'crypto';
 import type { user } from '../db/schema';
 import { emailService } from './email.service';
 import { passwordResetTokenRepo } from '../repos/passwordResetToken.repo';
+import { redis } from '../redis';
 
 type Tokens = { accessToken: string; refreshToken: string };
 type userWithTokens = {
@@ -158,11 +159,25 @@ export const authService = {
 		await sessionRepo.updateRefreshToken(sessionId, refreshTokenHash, expiresAt);
 		return { accessToken, refreshToken };
 	},
-	logout: async (sessionId: string): Promise<void> => {
+	logout: async (sessionId: string, userId?: string): Promise<void> => {
 		await sessionRepo.deleteSession(sessionId);
+		if (userId) {
+			try {
+				await redis.del(`user:session:${userId}`);
+				console.log('Invalidated session cache for user: ' + userId);
+			} catch (error) {
+				console.log('Redis delete error: ', error);
+			}
+		}
 	},
 
 	logoutAllDevices: async (userId: string): Promise<void> => {
 		await sessionRepo.deleteAllUserSessions(userId);
+		try {
+			await redis.del(`user:session:${userId}`);
+			console.log('Invalidated session cache for user: ' + userId);
+		} catch (error) {
+			console.log('Redis delete error: ', error);
+		}
 	}
 };

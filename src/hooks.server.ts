@@ -4,6 +4,38 @@ import { ACCESS_TOKEN_SECRET } from '$env/static/private';
 import { userRepo } from '$lib/server/repos/user.repo';
 import { authService } from '$lib/server/services/auth.service';
 import { deleteCookies, setCookies } from '$lib/server/utils/cookies';
+import { redis } from '$lib/server/redis';
+
+const getUser = async (userId: string) => {
+	const cacheKey = `user:session:${userId}`;
+	let user = null;
+	try {
+		const cachedUser = await redis.get(cacheKey);
+		if (cachedUser) {
+			console.log('Session Cache hit for user: ', cacheKey);
+			user = JSON.parse(cachedUser);
+		}
+	} catch (error) {
+		console.log('Redis Fetch error: ', error);
+	}
+	if (!user) {
+		console.log('Session cache miss for user: ', cacheKey);
+		const foundUser = await userRepo.findById(userId);
+		if (foundUser) {
+			const { passwordHash, ...userPayload } = foundUser;
+			void passwordHash;
+			user = userPayload;
+			try {
+				await redis.set(cacheKey, JSON.stringify(user), {
+					expiration: { type: 'EX', value: 3600 }
+				});
+			} catch (error) {
+				console.log('Redis save error: ', error);
+			}
+		}
+	}
+	return user;
+};
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const accessToken = event.cookies.get('accessToken');
@@ -16,9 +48,8 @@ export const handle: Handle = async ({ resolve, event }) => {
 			const { payload } = await jwtVerify(accessToken, accessTokenSecret);
 			const userId = payload.userId as string;
 			const sessionId = payload.sessionId as string;
-			const foundUser = await userRepo.findById(userId);
-			if (foundUser) {
-				const { passwordHash, ...user } = foundUser;
+			const user = await getUser(userId);
+			if (user) {
 				event.locals.user = user;
 				event.locals.session = { id: sessionId as string };
 			}
@@ -29,9 +60,8 @@ export const handle: Handle = async ({ resolve, event }) => {
 			const { payload } = await jwtVerify(tokens.accessToken, accessTokenSecret);
 			const userId = payload.userId as string;
 			const sessionId = payload.sessionId as string;
-			const foundUser = await userRepo.findById(userId);
-			if (foundUser) {
-				const { passwordHash, ...user } = foundUser;
+			const user = await getUser(userId);
+			if (user) {
 				event.locals.user = user;
 				event.locals.session = { id: sessionId as string };
 			}

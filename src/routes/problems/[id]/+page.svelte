@@ -109,16 +109,18 @@
 					if (currentIndex !== -1 && currentIndex < steps.length - 1) {
 						setActiveStep(steps[currentIndex + 1]);
 					}
+					await update({ reset: false });
 				}
 			} else if (result.type === 'failure') {
 				errorMessage =
 					result.data?.errors?.content?.[0] ||
 					result.data?.message ||
 					'Validation failed. Please check your response.';
+				await update({ reset: false });
 			} else {
 				errorMessage = 'An error occurred while saving your draft.';
+				await update({ reset: false });
 			}
-			await update({ reset: false });
 		};
 	};
 </script>
@@ -378,9 +380,25 @@
 						disabled:opacity-50 disabled:cursor-not-allowed"
 					>
 						{#if isSubmitting}
-							<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+							<svg
+								class="animate-spin h-4 w-4"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"
+								></circle>
+								<path
+									class="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+								></path>
 							</svg>
 							<span>{activeStep === 'reflection' ? 'Evaluating...' : 'Saving...'}</span>
 						{:else}

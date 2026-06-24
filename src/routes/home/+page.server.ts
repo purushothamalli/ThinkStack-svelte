@@ -14,7 +14,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions = {
 	logout: async ({ cookies, locals }) => {
-		if (locals.session?.id) await authService.logout(locals.session.id);
+		if (locals.session?.id && locals.user?.id)
+			await authService.logout(locals.session.id, locals.user.id);
 		deleteCookies(cookies);
 		throw redirect(303, '/login');
 	}

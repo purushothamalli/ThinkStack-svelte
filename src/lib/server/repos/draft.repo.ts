@@ -6,8 +6,7 @@ export const draftRepo = {
 		problemId: string,
 		stepName: string,
 		content: string,
-		isHintUsed: boolean,
-		updatedAt: Date
+		isHintUsed: boolean
 	) => {
 		return await prisma.draft.upsert({
 			where: {
@@ -19,7 +18,6 @@ export const draftRepo = {
 			update: {
 				currentStep: stepName,
 				[stepName]: content,
-				updatedAt,
 				hintsUsed: isHintUsed ? { increment: 1 } : undefined
 			},
 			create: {

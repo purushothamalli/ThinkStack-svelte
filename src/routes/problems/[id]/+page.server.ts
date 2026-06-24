@@ -4,6 +4,7 @@ import { problemService } from '$lib/server/services/problem.service';
 import { draftService } from '$lib/server/services/draft.service';
 import z from 'zod';
 import { submissionService } from '$lib/server/services/submission.service';
+import { isRateLimited } from '$lib/server/redis/rateLimiter';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	if (!locals.user) throw redirect(307, '/login');
@@ -44,6 +45,9 @@ export const actions: Actions = {
 				parsed.isHintUsed
 			);
 			if (parsed.activeStep === 'reflection') {
+				const limited = await isRateLimited(locals.user.id, 'submit', 30);
+				if (limited)
+					return fail(429, { message: 'You are submitting too fast! Wait for 30 seconds.' });
 				await submissionService.submitSolution(locals.user.id, parsed.problemId);
 			}
 			return { success: true };
