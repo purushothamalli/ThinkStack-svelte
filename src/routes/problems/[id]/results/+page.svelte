@@ -1,10 +1,36 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { invalidateAll } from '$app/navigation';
 
 	let { data }: { data: PageData } = $props();
 
 	let resolvedSubmission = $state<any>(undefined);
 	let isLoading = $state(true);
+
+	let evalStep = $state(0);
+	const evalSteps = [
+		'Submitting solution to the secure queue...',
+		'Retrieving your response steps and drafts...',
+		'Calling AI agent to evaluate your code...',
+		'Analyzing cognitive patterns and scoring criteria...',
+		'Comparing against expert reasoning flow...',
+		'Finalizing results and writing to database...'
+	];
+
+	$effect(() => {
+		if (data.evaluating) {
+			const interval = setInterval(() => {
+				invalidateAll();
+			}, 2000);
+			const textInterval = setInterval(() => {
+				evalStep = (evalStep + 1) % evalSteps.length;
+			}, 3000);
+			return () => {
+				clearInterval(interval);
+				clearInterval(textInterval);
+			};
+		}
+	});
 
 	$effect(() => {
 		isLoading = true;
@@ -61,6 +87,49 @@
 	);
 </script>
 
+{#if data.evaluating}
+	<div class="min-h-screen bg-stone-950 text-stone-200 flex flex-col items-center justify-center p-6 selection:bg-stone-500/30">
+		<div class="max-w-md w-full bg-stone-900/30 border-3 border-stone-850 rounded-3xl p-8 relative overflow-hidden text-center space-y-6">
+			<!-- Glow effects -->
+			<div class="absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+			<div class="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+			<!-- Dynamic Spinner -->
+			<div class="relative w-24 h-24 mx-auto flex items-center justify-center">
+				<div class="absolute inset-0 rounded-full border-4 border-stone-800"></div>
+				<div class="absolute inset-0 rounded-full border-4 border-t-indigo-500 border-r-emerald-500 animate-spin"></div>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="32"
+					height="32"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="text-indigo-400 animate-pulse relative z-10"
+				>
+					<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+				</svg>
+			</div>
+
+			<!-- Status Info -->
+			<div class="space-y-2">
+				<h2 class="text-xl font-black text-white tracking-tight">AI Evaluation in Progress</h2>
+				<p class="text-xs font-black tracking-widest uppercase text-indigo-400 min-h-6 transition-all duration-300">
+					{evalSteps[evalStep]}
+				</p>
+			</div>
+
+			<div class="bg-stone-950/50 border border-stone-850/50 rounded-2xl p-4 text-left">
+				<p class="text-xs text-stone-500 leading-relaxed">
+					We are processing your submission asynchronously using a background worker queue. This keeps the server responsive and prevents HTTP timeouts. The page will automatically refresh as soon as evaluation is completed.
+				</p>
+			</div>
+		</div>
+	</div>
+{:else}
 <div class="min-h-screen bg-stone-950 text-stone-200 p-6 md:p-12 selection:bg-stone-500/30">
 	<div class="max-w-7xl mx-auto space-y-8">
 		<!-- Header (Renders instantly) -->
@@ -358,3 +427,4 @@
 		{/if}
 	</div>
 </div>
+{/if}
