@@ -2,14 +2,9 @@ import { redis } from '.';
 import { draftRepo } from '../repos/draft.repo';
 import { submissionRepo } from '../repos/submission.repo';
 import { AIService } from '../services/AI.service';
+import { calculateFinalScore } from '../utils/scoring';
 import { DRAFT_QUEUE_KEY, SUBMIT_QUEUE_KEY, type DraftJob, type submitJob } from './queue';
 
-const hint_penalties: Record<number, number> = {
-	0: 0,
-	1: 5,
-	2: 10,
-	3: 15
-};
 let isRunning = false;
 export async function runDraftWorker(draftWorkerClient: any) {
 	while (true) {
@@ -52,8 +47,10 @@ export async function runSubmissionWorker(submissionWorkerClient: any) {
 				if (!draft || !problem)
 					throw new Error('Required problem or draft details missing for evaluation!');
 				const result = await AIService.evaluatesubmission(problem, draft);
-				const penaltyApplied = hint_penalties[draft.hintsUsed] ?? 0;
-				const finalScore = Math.max(0, result.aiBaseScore - penaltyApplied);
+				const { hintPenalty: penaltyApplied, finalScore } = calculateFinalScore(
+					result.aiBaseScore,
+					draft.hintsUsed ?? 0
+				);
 				await submissionRepo.saveSubmission(
 					{
 						userId: job.userId,
