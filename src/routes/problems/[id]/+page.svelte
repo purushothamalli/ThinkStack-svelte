@@ -157,7 +157,7 @@
 					<span class="text-xs font-black tracking-widest uppercase text-stone-500">
 						{problem.category}
 					</span>
-					<h1 class="text-3xl font-black tracking-tight text-white leading-none">
+					<h1 id="heading" class="text-3xl font-black tracking-tight text-white leading-none">
 						{problem.title}
 					</h1>
 					<div class="pt-1">
@@ -174,7 +174,10 @@
 					</div>
 				</div>
 				<div class="border-t border-stone-850 pt-4">
-					<p class="text-stone-400 text-sm leading-relaxed whitespace-pre-line select-text">
+					<p
+						id="description"
+						class="text-stone-400 text-sm leading-relaxed whitespace-pre-line select-text"
+					>
 						{problem.description}
 					</p>
 				</div>

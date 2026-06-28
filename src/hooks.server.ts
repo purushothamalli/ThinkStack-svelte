@@ -10,10 +10,12 @@ const getUser = async (userId: string) => {
 	const cacheKey = `user:session:${userId}`;
 	let user = null;
 	try {
-		const cachedUser = await redis.get(cacheKey);
-		if (cachedUser) {
-			console.log('Session Cache hit for user: ', cacheKey);
-			user = JSON.parse(cachedUser);
+		if (import.meta.env.MODE !== 'test') {
+			const cachedUser = await redis.get(cacheKey);
+			if (cachedUser) {
+				console.log('Session Cache hit for user: ', cacheKey);
+				user = JSON.parse(cachedUser);
+			}
 		}
 	} catch (error) {
 		console.log('Redis Fetch error: ', error);
@@ -26,9 +28,11 @@ const getUser = async (userId: string) => {
 			void passwordHash;
 			user = userPayload;
 			try {
-				await redis.set(cacheKey, JSON.stringify(user), {
-					expiration: { type: 'EX', value: 3600 }
-				});
+				if (import.meta.env.MODE !== 'test') {
+					await redis.set(cacheKey, JSON.stringify(user), {
+						expiration: { type: 'EX', value: 3600 }
+					});
+				}
 			} catch (error) {
 				console.log('Redis save error: ', error);
 			}

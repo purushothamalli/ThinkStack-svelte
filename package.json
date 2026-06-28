@@ -17,7 +17,8 @@
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"test:unit": "vitest",
-		"test:integration": "vitest 'src/**/*.integration.test.ts'"
+		"test:integration": "vitest 'src/**/*.integration.test.ts'",
+		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
@@ -25,6 +26,7 @@
 		"@internationalized/date": "^3.12.2",
 		"@lucide/svelte": "^1.18.0",
 		"@neondatabase/serverless": "^1.1.0",
+		"@playwright/test": "^1.61.1",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
