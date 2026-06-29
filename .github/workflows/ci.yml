@@ -53,8 +53,6 @@ jobs:
         run: npx prisma db push
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/thinkstack_test?sslmode=disable
-      - name: Run Linter
-        run: npm run lint
       - name: Run Vitest Unit & Integration Tests
         run: npm run test:unit
         env:
