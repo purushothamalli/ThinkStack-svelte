@@ -11,26 +11,24 @@ const prisma =
 	DATABASE_URL.includes('localhost') ||
 	DATABASE_URL.includes('127.0.0.1') ||
 	DATABASE_URL.includes('db')
-		? new PrismaClient({ datasources: { db: { url: DATABASE_URL } } })
+		? new PrismaClient()
 		: new PrismaClient({ adapter: new PrismaNeon({ connectionString: DATABASE_URL }) });
-let userId: string, problemId: string;
+let problemId: string;
 
 test.beforeEach(async () => {
 	await prisma.user.deleteMany({ where: { NOT: { email: 'fake-email@gmail.com' } } });
 	await prisma.problem.deleteMany();
-	userId = (
-		await prisma.user.upsert({
-			where: { email: 'fake-email@gmail.com' },
-			create: {
-				firstName: 'test',
-				lastName: 'user',
-				email: 'fake-email@gmail.com',
-				passwordHash: '$2b$10$SIVUthFCptFyMzKNhSNyLOCN4l1dBrgJePwH4Cjvo8PXYOJO9c8Ki'
-			},
-			update: {},
-			select: { id: true }
-		})
-	).id;
+	await prisma.user.upsert({
+		where: { email: 'fake-email@gmail.com' },
+		create: {
+			firstName: 'test',
+			lastName: 'user',
+			email: 'fake-email@gmail.com',
+			passwordHash: '$2b$10$SIVUthFCptFyMzKNhSNyLOCN4l1dBrgJePwH4Cjvo8PXYOJO9c8Ki'
+		},
+		update: {},
+		select: { id: true }
+	});
 	problemId = (
 		await prisma.problem.create({
 			data: {
