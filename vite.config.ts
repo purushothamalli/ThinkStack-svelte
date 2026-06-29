@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	test: {
-		include: ['./src', './**/*.{test,spec}.ts']
+		include: ['src/**/*.{test,spec}.ts']
 	},
 	plugins: [
 		tailwindcss(),
