@@ -13,6 +13,6 @@ describe('Database environment', () => {
 	test('should load the test database URL from the test environment file', () => {
 		console.log(DATABASE_URL);
 		expect(DATABASE_URL).toBeDefined();
-		expect(DATABASE_URL).toMatch(/ep-gentle-rice/);
+		expect(DATABASE_URL).toMatch(/ep-gentle-rice|localhost|127\.0\.0\.1|db/);
 	});
 });

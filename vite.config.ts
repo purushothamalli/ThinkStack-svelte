@@ -6,7 +6,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	test: {
-		include: ['src/**/*.{test,spec}.ts']
+		include: ['src/**/*.{test,spec}.ts'],
+		fileParallelism: false,
+		maxWorkers: 1,
+		minWorkers: 1
 	},
 	plugins: [
 		tailwindcss(),
