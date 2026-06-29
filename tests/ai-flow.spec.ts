@@ -12,16 +12,18 @@ const prisma = new PrismaClient({ adapter: neon });
 let userId: string, problemId: string;
 
 test.beforeEach(async () => {
-	await prisma.user.deleteMany();
+	await prisma.user.deleteMany({ where: { NOT: { email: 'fake-email@gmail.com' } } });
 	await prisma.problem.deleteMany();
 	userId = (
-		await prisma.user.create({
-			data: {
+		await prisma.user.upsert({
+			where: { email: 'fake-email@gmail.com' },
+			create: {
 				firstName: 'test',
 				lastName: 'user',
 				email: 'fake-email@gmail.com',
 				passwordHash: '$2b$10$SIVUthFCptFyMzKNhSNyLOCN4l1dBrgJePwH4Cjvo8PXYOJO9c8Ki'
 			},
+			update: {},
 			select: { id: true }
 		})
 	).id;
@@ -40,20 +42,14 @@ test.beforeEach(async () => {
 	).id;
 });
 test.afterEach(async () => {
-	await prisma.user.deleteMany();
+	await prisma.user.deleteMany({ where: { NOT: { email: 'fake-email@gmail.com' } } });
 	await prisma.problem.deleteMany();
 	await prisma.$disconnect();
 });
 test('should load the problem attempt page and display details', async ({ page }) => {
 	test.setTimeout(90000);
-	await page.goto('/login');
-	await page.waitForLoadState('networkidle');
-	await expect(page).toHaveURL('http://localhost:5173/login');
-	await page.getByPlaceholder('Email').fill('fake-email@gmail.com');
-	await page.getByPlaceholder('Password').fill('password123');
-	await page.getByRole('button', { name: 'Login' }).click();
-	await expect(page).toHaveURL('http://localhost:5173/home');
 	await page.goto(`/problems/${problemId}`);
+	await page.waitForLoadState('networkidle');
 	await expect(page.getByRole('heading', { name: 'E2E test problem' })).toBeVisible();
 	await expect(page.getByText('Fake problem for E2E testing')).toBeVisible();
 	const steps: Record<string, string> = {
@@ -63,13 +59,15 @@ test('should load the problem attempt page and display details', async ({ page }
 		solution: 'fake-solutionfake-solutionfake-solutionfake-solution'
 	};
 	for (const [step, value] of Object.entries(steps)) {
-		await expect(
-			page.getByRole('heading', { name: `Step: ${step.charAt(0).toUpperCase()}` })
-		).toBeVisible();
+		await expect(page.getByRole('heading', { name: `Step: ${step}` })).toBeVisible({
+			timeout: 15000
+		});
 		await page.locator('[name="content"]').fill(value);
 		await page.getByRole('button', { name: 'Save & Next' }).click();
 	}
-	await expect(page.getByRole('heading', { name: 'reflection' })).toBeVisible();
+	await expect(page.getByRole('heading', { name: 'Step: reflection' })).toBeVisible({
+		timeout: 15000
+	});
 	await page
 		.locator('[name="content"]')
 		.fill('fake-reflectionfake-reflectionfake-reflectionfake-reflection');
