@@ -7,8 +7,12 @@ import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL) throw new Error('No db url is set!');
-const neon = new PrismaNeon({ connectionString: DATABASE_URL });
-const prisma = new PrismaClient({ adapter: neon });
+const prisma =
+	DATABASE_URL.includes('localhost') ||
+	DATABASE_URL.includes('127.0.0.1') ||
+	DATABASE_URL.includes('db')
+		? new PrismaClient({ datasources: { db: { url: DATABASE_URL } } })
+		: new PrismaClient({ adapter: new PrismaNeon({ connectionString: DATABASE_URL }) });
 
 setup('authenticate', async ({ page }) => {
 	setup.setTimeout(60000);
