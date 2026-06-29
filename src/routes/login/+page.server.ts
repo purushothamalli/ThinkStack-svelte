@@ -37,4 +37,3 @@ export const actions: Actions = {
 		if (success) throw redirect(303, '/home');
 	}
 };
-
