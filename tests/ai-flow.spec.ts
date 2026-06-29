@@ -1,11 +1,35 @@
 import { test, expect } from '@playwright/test';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { neonConfig } from '@neondatabase/serverless';
+import ws from 'ws';
+import pg from 'pg';
+
+neonConfig.webSocketConstructor = ws;
 
 let prisma: PrismaClient;
 let problemId: string;
 
 test.beforeEach(async () => {
-	prisma = new PrismaClient();
+	const DATABASE_URL = process.env.DATABASE_URL;
+	if (!DATABASE_URL) throw new Error('No db url is set!');
+
+	const isLocal =
+		DATABASE_URL.includes('localhost') ||
+		DATABASE_URL.includes('127.0.0.1') ||
+		DATABASE_URL.includes('db');
+
+	let adapter;
+	if (isLocal) {
+		const pool = new pg.Pool({ connectionString: DATABASE_URL });
+		adapter = new PrismaPg(pool);
+	} else {
+		adapter = new PrismaNeon({ connectionString: DATABASE_URL });
+	}
+
+	prisma = new PrismaClient({ adapter });
+
 	await prisma.user.deleteMany({ where: { NOT: { email: 'fake-email@gmail.com' } } });
 	await prisma.problem.deleteMany();
 	await prisma.user.upsert({
@@ -33,11 +57,13 @@ test.beforeEach(async () => {
 		})
 	).id;
 });
+
 test.afterEach(async () => {
 	await prisma.user.deleteMany({ where: { NOT: { email: 'fake-email@gmail.com' } } });
 	await prisma.problem.deleteMany();
 	await prisma.$disconnect();
 });
+
 test('should load the problem attempt page and display details', async ({ page }) => {
 	test.setTimeout(90000);
 	await page.goto(`/problems/${problemId}`);
