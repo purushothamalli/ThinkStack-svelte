@@ -2,6 +2,7 @@ import type { Draft } from '@prisma/client';
 import { redis } from '../redis';
 import { QueueService, type DraftJob, type IQueueService } from '../redis/queue';
 import { draftRepo, type IDraftRepository } from '../repos/draft.repo';
+import { Cache } from '../decorators/cache';
 
 type steps = 'understanding' | 'breakdown' | 'approach' | 'solution' | 'reflection';
 
@@ -22,29 +23,9 @@ class DraftServiceImplementation implements IDraftService {
 		private readonly draftRepo: IDraftRepository,
 		private readonly redisClient: typeof redis
 	) {}
+	@Cache('draft', 86400)
 	public async getDraft(userId: string, problemId: string): Promise<Draft | null> {
-		const cacheKey = `draft:${userId}:${problemId}`;
-		try {
-			const cached = await this.redisClient.get(cacheKey);
-			if (cached) {
-				console.log(`Draft cache hit: ${cacheKey}`);
-				return JSON.parse(cached);
-			}
-		} catch (error) {
-			console.log('Redis fetch error: ', error);
-		}
-		console.log(`Draft cache miss! Fetching from postgres: ${cacheKey}`);
-		const draft = await this.draftRepo.getDraft(userId, problemId);
-		if (draft) {
-			try {
-				await this.redisClient.set(cacheKey, JSON.stringify(draft), {
-					expiration: { type: 'EX', value: 86400 }
-				});
-			} catch (error) {
-				console.log('Redis draft set error: ', error);
-			}
-		}
-		return draft;
+		return await this.draftRepo.getDraft(userId, problemId);
 	}
 	public async saveDraft(
 		userId: string,
