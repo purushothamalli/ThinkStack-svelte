@@ -1,8 +1,9 @@
 import { GROQ_API_KEY } from '$env/static/private';
 import Groq from 'groq-sdk';
 import z from 'zod';
-import type { draft, problem } from '../db/schema';
+// import type { draft, problem } from '../db/schema';
 import { getPrompt } from '../utils/getPrompt';
+import type { Draft, Problem } from '@prisma/client';
 
 const groq = new Groq({
 	apiKey: GROQ_API_KEY
@@ -30,9 +31,14 @@ const evaluationSchema = z.object({
 	})
 });
 
-export const AIService = {
-	evaluatesubmission: async (problem: problem, draft: draft) => {
-		const res = await groq.chat.completions.create({
+export interface IAIService {
+	evaluateSubmission(problem: Problem, draft: Draft): Promise<z.infer<typeof evaluationSchema>>;
+}
+
+class AIServiceImplementation implements IAIService {
+	constructor(private readonly groqClient: Groq) {}
+	public async evaluateSubmission(problem: Problem, draft: Draft) {
+		const res = await this.groqClient.chat.completions.create({
 			model: 'llama-3.3-70b-versatile',
 			response_format: { type: 'json_object' },
 			messages: [
@@ -50,4 +56,28 @@ export const AIService = {
 		const parsed = JSON.parse(content);
 		return evaluationSchema.parse(parsed);
 	}
-};
+}
+
+export const aIService: IAIService = new AIServiceImplementation(groq);
+
+// export const AIService = {
+// 	evaluatesubmission: async (problem: problem, draft: draft) => {
+// 		const res = await groq.chat.completions.create({
+// 			model: 'llama-3.3-70b-versatile',
+// 			response_format: { type: 'json_object' },
+// 			messages: [
+// 				{
+// 					role: 'user',
+// 					content: getPrompt(draft, problem)
+// 				}
+// 			],
+// 			temperature: 0.3
+// 		});
+// 		const content = res.choices[0]?.message?.content;
+// 		if (!content) {
+// 			throw new Error('AI evaluator returned an empty response.');
+// 		}
+// 		const parsed = JSON.parse(content);
+// 		return evaluationSchema.parse(parsed);
+// 	}
+// };

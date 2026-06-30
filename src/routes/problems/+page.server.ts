@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 	const difficulty = difficultySchema.safeParse(rawdifficulty).success
 		? (rawdifficulty as 'easy' | 'medium' | 'hard')
 		: undefined;
-	const problems = await problemService.getproblems(difficulty);
+	const problems = await problemService.getProblems(difficulty);
 	return {
 		problems
 	};
