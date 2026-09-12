@@ -1,42 +1,50 @@
-# sv
+# ThinkStack
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+ThinkStack is a full-stack platform built with SvelteKit, utilizing Prisma, Drizzle ORM, and Redis for background processing.
 
-## Creating a project
+## Tech Stack
+- **Frontend:** SvelteKit, Tailwind CSS
+- **Backend:** Node.js, PostgreSQL (Neon), Redis
+- **Database:** Prisma (schema), Drizzle ORM (queries)
+- **Features:** JWT Authentication, Groq API (AI), Cloudinary (Media), Nodemailer (SMTP)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Local Development
 
-```sh
-# create a new project
-npx sv create my-app
+### 1. Prerequisites
+- Node.js (v18+)
+- Docker (optional, for running Redis locally)
+
+### 2. Setup
+Clone the repository and run the setup script:
+
+```bash
+git clone https://github.com/purushothamalli/ThinkStack-svelte.git
+cd ThinkStack-svelte
+npm install
+npm run setup
 ```
 
-To recreate this project with the same configuration:
+The interactive setup script will automatically generate your local JWT secrets and optionally spin up the Redis container for you.
 
-```sh
-# recreate this project
-npx sv@0.16.1 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:typography,forms" drizzle="database:postgresql+postgresql:neon" --install npm ./
-```
+### 3. Configure `.env`
+Ensure you have configured the following secrets in your `.env` file before running the application or pushing the database schema:
+- `DATABASE_URL`
+- `EMAIL_USER` & `EMAIL_PASS`
+- `GROQ_API_KEY`
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
 
-## Developing
+### 4. Database Commands
+- `npm run db:push` - Pushes the schema to the database (for rapid development)
+- `npm run db:generate` - Generates SQL migrations
+- `npm run db:migrate` - Applies migrations
+- `npm run db:studio` - Launches Drizzle Studio
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+### 5. Start Application
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
+### 6. Testing
+```bash
+npm run test:integration
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
